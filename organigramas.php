@@ -70,7 +70,7 @@
                                                   <i class="bx bx-copy"></i>
                                               </button>
                                           </div>
-                                          <div id="qrCode" class="my-3"></div>
+                                          <div id="qrCode" class="my-3" style="justify-self: center;"></div>
                                           <small class="text-muted">Escanea este código QR para acceder al registro</small>
                                       </div>
                                       <div class="modal-footer">
