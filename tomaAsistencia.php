@@ -66,7 +66,7 @@
                                 <div class="d-flex align-items-end row">
                                     <div class="col-sm-12">
                                         <div class="card-body">
-                                            <h5 class="card-title text-primary">Bienvenido al curso "<strong id="lblTema">tema</strong>" 🎉</h5>
+                                            <h5 class="display-4 mb-0 text-primary">Bienvenido al curso "<strong id="lblTema">tema</strong>" 🎉</h5>
                                             <p class="mb-4">
                                                 Detalles del curso
                                             </p>
