@@ -269,9 +269,9 @@
             if (data && data.data && data.data.length > 0) {
                 text = data.data[0].NomUser;
                 document.getElementById("txtNombre").value = text;
-                document.getElementById("btnAnotarme").disabled = true;
-            }else{
                 document.getElementById("btnAnotarme").disabled = false;
+            }else{
+                document.getElementById("btnAnotarme").disabled = true;
             }
         });
 
