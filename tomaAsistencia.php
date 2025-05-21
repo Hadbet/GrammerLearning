@@ -224,7 +224,7 @@
 
 <script>
 
-    $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/daoGuardarLista.php?idLista='+getParameterByName("idLista"), function (data) {
+    $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaLista.php?idLista='+getParameterByName("idLista"), function (data) {
 
         if (data && data.data && data.data.length > 0) {
             for (var i = 0; i < data.data.length; i++) {
