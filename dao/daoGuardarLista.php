@@ -54,6 +54,7 @@ function registrarAsistencia($tema,$objetivo,$temarioCompleto,$instructor,$tipoI
     $Object = new DateTime();
     $Object->setTimezone(new DateTimeZone('America/Denver'));
     $DateAndTime = $Object->format("Y/m/d h:i:s");
+    $fecha_mysql = date("Y-m-d H:i:s", strtotime($fecha));
 
     $stmt = $conex->prepare("INSERT INTO `Listas_Asistencias`(`Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`) 
                                     VALUES (?,?,?,?,?,?,?,?,'',1)");
@@ -62,7 +63,7 @@ function registrarAsistencia($tema,$objetivo,$temarioCompleto,$instructor,$tipoI
         throw new Exception("Error al preparar la consulta: " . $conex->error);
     }
 
-    $stmt->bind_param("ssssisss", $tema, $objetivo, $temarioCompleto, $instructor,$tipoInstructor,$area,$fecha,$DateAndTime);
+    $stmt->bind_param("ssssisss", $tema, $objetivo, $temarioCompleto, $instructor,$tipoInstructor,$area,$fecha_mysql,$DateAndTime);
     $resultado = $stmt->execute();
 
     $stmt->close();
