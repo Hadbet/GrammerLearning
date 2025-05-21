@@ -184,7 +184,7 @@
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="txtNominaAsistencia" />
                                         </div>
-                                        <button type="button" id="btnAsistencia" onclick="" class="btn btn-primary col-sm-1">Registrar</button>
+                                        <button type="button" id="btnAsistencia" onclick="actualizarAsistencia()" class="btn btn-primary col-sm-1">Registrar</button>
                                     </div>
 
                                     <div class="table-responsive text-nowrap mt-2">
