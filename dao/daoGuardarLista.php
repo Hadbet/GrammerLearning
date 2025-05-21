@@ -15,10 +15,11 @@ $instructor = filter_input(INPUT_POST, 'instructor', FILTER_SANITIZE_STRING);
 $tipoInstructor = filter_input(INPUT_POST, 'tipoInstructor', FILTER_SANITIZE_NUMBER_INT); // Cambiado a INT
 $area = filter_input(INPUT_POST, 'area', FILTER_SANITIZE_STRING);
 $fecha = filter_input(INPUT_POST, 'fecha', FILTER_SANITIZE_STRING);
+$nomina = filter_input(INPUT_POST, 'nomina', FILTER_SANITIZE_STRING);
 
 // Validar campos
 if (empty($tema) || empty($objetivo) || empty($temarioCompleto) || empty($instructor) ||
-    empty($tipoInstructor) || empty($area) || empty($fecha)) {
+    empty($tipoInstructor) || empty($area) || empty($fecha) || empty($nomina)) {
     http_response_code(400);
     exit(json_encode(['success' => false, 'message' => 'Todos los campos son obligatorios.']));
 }
@@ -33,7 +34,7 @@ if (!$conex) {
 
 try {
 
-    $registroExitoso = registrarAsistencia($conex, $tema, $objetivo, $temarioCompleto, $instructor, $tipoInstructor, $area, $fecha);
+    $registroExitoso = registrarAsistencia($conex, $tema, $objetivo, $temarioCompleto, $instructor, $tipoInstructor, $area, $fecha,$nomina);
 
     if ($registroExitoso) {
         $idGenerado = $conex->insert_id;
@@ -54,21 +55,20 @@ try {
     ]);
 }
 
-function registrarAsistencia($conex, $tema, $objetivo, $temarioCompleto, $instructor, $tipoInstructor, $area, $fecha) {
+function registrarAsistencia($conex, $tema, $objetivo, $temarioCompleto, $instructor, $tipoInstructor, $area, $fecha,$nomina) {
     $Object = new DateTime();
     $Object->setTimezone(new DateTimeZone('America/Denver'));
     $DateAndTime = $Object->format("Y-m-d H:i:s"); // Formato corregido
     $fecha_mysql = date("Y-m-d H:i:s", strtotime($fecha));
 
-    $stmt = $conex->prepare("INSERT INTO `Listas_Asistencias`(`Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`) 
-                            VALUES (?,?,?,?,?,?,?,?,'',1)");
+    $stmt = $conex->prepare("INSERT INTO `Listas_Asistencias`(`Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`, `Creador`) 
+                            VALUES (?,?,?,?,?,?,?,?,'',1,?)");
 
     if (!$stmt) {
         throw new Exception("Error al preparar la consulta: " . $conex->error);
     }
 
-    // TipoInstructor ahora es integer (i)
-    $stmt->bind_param("ssssisss", $tema, $objetivo, $temarioCompleto, $instructor, $tipoInstructor, $area, $fecha_mysql, $DateAndTime);
+    $stmt->bind_param("ssssissss", $tema, $objetivo, $temarioCompleto, $instructor, $tipoInstructor, $area, $fecha_mysql, $DateAndTime,$nomina);
     $resultado = $stmt->execute();
     $stmt->close();
 

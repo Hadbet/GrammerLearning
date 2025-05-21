@@ -177,7 +177,7 @@
                                     <h5 class="card-title m-0 me-2">Inscritos en el curso</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive text-nowrap mt-4">
+                                    <div class="table-responsive text-nowrap mt-2">
                                         <table class="table table-bordered" id="temario-table">
                                             <thead>
                                             <tr>

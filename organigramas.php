@@ -330,6 +330,7 @@
           var area = document.getElementById("txtArea").value;
           var fecha = document.getElementById("txtFecha").value;
           const fechaMySQL = fecha.replace('T', ' ') + ':00';
+          var nomina = "00001606";
 
           console.log("Datos a enviar:", {
               tema: tema,
@@ -349,6 +350,7 @@
           formData.append('tipoInstructor', 1);
           formData.append('area', area);
           formData.append('fecha', fechaMySQL);
+          formData.append('nomina', nomina);
 
           fetch('https://grammermx.com/RH/GrammerLearning/dao/daoGuardarLista.php', {
               method: 'POST',
