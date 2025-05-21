@@ -143,7 +143,7 @@
                                                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                                                 Cancelar
                                                             </button>
-                                                            <button type="button" id="btnAnotarme" class="btn btn-primary" disabled>Anotarme</button>
+                                                            <button type="button" id="btnAnotarme" onclick="guardarAsistencia()" class="btn btn-primary" disabled>Anotarme</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -223,12 +223,14 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 <script>
+    var id;
 
     $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaLista.php?idLista='+getParameterByName("idLista"), function (data) {
 
         if (data && data.data && data.data.length > 0) {
             for (var i = 0; i < data.data.length; i++) {
 
+                id = data.data[i].IdLista;
                 var tema = data.data[i].Tema;
                 var objetivo = data.data[i].Objetivo;
                 var temario = data.data[i].Temario;
@@ -278,6 +280,30 @@
             }
         });
 
+    }
+
+    function guardarAsistencia() {
+
+        var nomina = document.getElementById("txtNomina").values;
+        var nombre = document.getElementById("txtNombre").values;
+
+        var formData = new FormData();
+        formData.append('nomina', nomina);
+        formData.append('nombre', nombre);
+        formData.append('folioLista', id);
+
+        fetch('https://grammermx.com/RH/GrammerLearning/dao/daoGuardarAsistencia.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+
+                } else {
+                    alert('Error al guardar: ' + (data.message || 'Error desconocido'));
+                }
+            });
     }
 
     function verificarNomina(nomina){
