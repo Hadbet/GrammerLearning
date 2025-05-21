@@ -259,11 +259,47 @@
                 htmlLista += '</ul>';
 
                 document.getElementById("lblTemario").innerHTML = htmlLista;
+                llenadoTabla();
             }
         }else{
 
         }
     });
+
+    function llenadoTabla() {
+        const tabla = document.getElementById('temario-table').getElementsByTagName('tbody')[0];
+        tabla.innerHTML = '';
+
+        $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaAsistentes.php?idLista='+getParameterByName("idLista"), function(data) {
+            if (data && data.data && data.data.length > 0) {
+                for (var i = 0; i < data.data.length; i++) {
+                    const fila = tabla.insertRow();
+
+                    const celdaNomina = fila.insertCell(0);
+                    const celdaNombre = fila.insertCell(1);
+
+                    celdaNomina.textContent = data.data[i].Nomina;
+                    celdaNombre.textContent = data.data[i].Nombre;
+
+                    fila.classList.add('fila-asistente');
+                    celdaNomina.classList.add('text-center');
+                }
+            } else {
+                const fila = tabla.insertRow();
+                const celda = fila.insertCell(0);
+                celda.colSpan = 2;
+                celda.textContent = 'No hay asistentes registrados';
+                celda.classList.add('text-center', 'text-muted');
+            }
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.error("Error al obtener datos:", textStatus, errorThrown);
+            const fila = tabla.insertRow();
+            const celda = fila.insertCell(0);
+            celda.colSpan = 2;
+            celda.textContent = 'Error al cargar los datos';
+            celda.classList.add('text-center', 'text-danger');
+        });
+    }
 
     function verificarUsuario(){
 
@@ -284,8 +320,8 @@
 
     function guardarAsistencia() {
 
-        var nomina = document.getElementById("txtNomina").values;
-        var nombre = document.getElementById("txtNombre").values;
+        var nomina = document.getElementById("txtNomina").value;
+        var nombre = document.getElementById("txtNombre").value;
 
         var formData = new FormData();
         formData.append('nomina', nomina);
@@ -298,10 +334,16 @@
         })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-
+                llenadoTabla();
+                if (data.ya_registrado) {
+                    // Mostrar mensaje especial para usuario ya registrado
+                    alert('Ya estabas registrado previamente en esta lista');
+                } else if (data.success) {
+                    // Registro exitoso
+                    alert('Registro completado con éxito');
                 } else {
-                    alert('Error al guardar: ' + (data.message || 'Error desconocido'));
+                    // Otros errores
+                    alert('Error: ' + data.message);
                 }
             });
     }

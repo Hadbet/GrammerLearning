@@ -1,7 +1,6 @@
 <?php
 require_once 'db/db_RH.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     exit(json_encode(['success' => false, 'message' => 'Método no permitido. Se requiere POST.']));
@@ -26,7 +25,26 @@ if (!$conex) {
 }
 
 try {
+    // 1. Primero verificamos si ya existe un registro
+    $stmtVerificar = $conex->prepare("SELECT COUNT(*) AS existe FROM `Asistencias` 
+                                     WHERE `Nomina` = ? AND `FolioLista` = ?");
+    $stmtVerificar->bind_param("si", $nomina, $folioLista);
+    $stmtVerificar->execute();
+    $resultado = $stmtVerificar->get_result();
+    $fila = $resultado->fetch_assoc();
+    $stmtVerificar->close();
 
+    if ($fila['existe'] > 0) {
+        // Si ya existe un registro
+        echo json_encode([
+            'success' => false,
+            'message' => 'Ya estás registrado en esta lista',
+            'ya_registrado' => true
+        ]);
+        exit;
+    }
+
+    // 2. Si no existe, procedemos con el registro
     $registroExitoso = registrarAsistencia($conex, $nomina, $nombre, $folioLista);
 
     if ($registroExitoso) {
@@ -60,7 +78,6 @@ function registrarAsistencia($conex, $nomina, $nombre, $folioLista) {
         throw new Exception("Error al preparar la consulta: " . $conex->error);
     }
 
-    // TipoInstructor ahora es integer (i)
     $stmt->bind_param("ssis", $nomina, $nombre, $folioLista, $DateAndTime);
     $resultado = $stmt->execute();
     $stmt->close();
