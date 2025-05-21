@@ -265,16 +265,29 @@
 
     function verificarUsuario(){
 
-        $.getJSON('https://grammermx.com/RH/GrammovilApp/inicio/dao/DaoUsuario.php?usuario=' + document.getElementById("txtNomina").value, function (data) {
+        var nomina = verificarNomina(document.getElementById("txtNomina").value);
+
+        $.getJSON('https://grammermx.com/RH/GrammovilApp/inicio/dao/DaoUsuario.php?usuario=' + nomina, function (data) {
             if (data && data.data && data.data.length > 0) {
                 text = data.data[0].NomUser;
                 document.getElementById("txtNombre").value = text;
+                document.getElementById("txtNomina").value = nomina;
                 document.getElementById("btnAnotarme").disabled = false;
             }else{
                 document.getElementById("btnAnotarme").disabled = true;
             }
         });
 
+    }
+
+    function verificarNomina(nomina){
+        if (nomina.length===1){return "0000000"+nomina}
+        if (nomina.length===2){return "000000"+nomina}
+        if (nomina.length===3){return "00000"+nomina}
+        if (nomina.length===4){return "0000"+nomina}
+        if (nomina.length===5){return "000"+nomina}
+        if (nomina.length===6){return "00"+nomina}
+        if (nomina.length===7){return "0"+nomina}
     }
 
     function getParameterByName(name) {
