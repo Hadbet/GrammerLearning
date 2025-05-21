@@ -329,6 +329,7 @@
           var tipoInstructor = document.querySelector('input[name="default-radio-1"]:checked').value;
           var area = document.getElementById("txtArea").value;
           var fecha = document.getElementById("txtFecha").value;
+          const fechaMySQL = fecha.replace('T', ' ') + ':00';
 
           console.log("Datos a enviar:", {
               tema: tema,
@@ -337,7 +338,7 @@
               instructor: instructor,
               tipoInstructor: tipoInstructor,
               area: area,
-              fecha: fecha
+              fecha: fechaMySQL
           });
 
           var formData = new FormData();
@@ -347,7 +348,7 @@
           formData.append('instructor', instructor);
           formData.append('tipoInstructor', tipoInstructor);
           formData.append('area', area);
-          formData.append('fecha', fecha);
+          formData.append('fecha', fechaMySQL);
 
           fetch('https://grammermx.com/RH/GrammerLearning/dao/daoGuardarLista.php', {
               method: 'POST',
