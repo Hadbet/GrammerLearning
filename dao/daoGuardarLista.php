@@ -1,84 +1,82 @@
 <?php
 require_once 'db_RH.php';
 
-// Configuración para PHP 8
-header('Content-Type: application/json');
+// Habilita errores para depuración (quitar en producción)
 error_reporting(E_ALL);
-ini_set('display_errors', 0); // Desactivar en producción
+ini_set('display_errors', 1);
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    exit(json_encode(['success' => false, 'message' => 'Método no permitido. Se requiere POST.']));
+}
+
+// Obtener datos
+$tema = filter_input(INPUT_POST, 'tema', FILTER_SANITIZE_STRING);
+$objetivo = filter_input(INPUT_POST, 'objetivo', FILTER_SANITIZE_STRING);
+$temarioCompleto = filter_input(INPUT_POST, 'temarioCompleto', FILTER_SANITIZE_STRING);
+$instructor = filter_input(INPUT_POST, 'instructor', FILTER_SANITIZE_STRING);
+$tipoInstructor = filter_input(INPUT_POST, 'tipoInstructor', FILTER_SANITIZE_NUMBER_INT); // Cambiado a INT
+$area = filter_input(INPUT_POST, 'area', FILTER_SANITIZE_STRING);
+$fecha = filter_input(INPUT_POST, 'fecha', FILTER_SANITIZE_STRING);
+
+// Validar campos
+if (empty($tema) || empty($objetivo) || empty($temarioCompleto) || empty($instructor) ||
+    empty($tipoInstructor) || empty($area) || empty($fecha)) {
+    http_response_code(400);
+    exit(json_encode(['success' => false, 'message' => 'Todos los campos son obligatorios.']));
+}
+
+$con = new LocalConector();
+$conex = $con->conectar();
+
+if (!$conex) {
+    http_response_code(500);
+    exit(json_encode(['success' => false, 'message' => 'Error de conexión a la base de datos']));
+}
 
 try {
-    // Validación de método HTTP
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        throw new Exception("Método no permitido", 405);
-    }
+    echo "INSERT INTO `Listas_Asistencias`(`Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`) 
+                            VALUES ('$tema','$objetivo','$temarioCompleto','$instructor','$tipoInstructor','$area','$fecha','$fecha','',1)";
+    /*
+    $registroExitoso = registrarAsistencia($conex, $tema, $objetivo, $temarioCompleto, $instructor, $tipoInstructor, $area, $fecha);
 
-    // Recepción y validación de datos (forma segura para PHP 8)
-    $data = filter_input_array(INPUT_POST, [
-        'tema' => FILTER_UNSAFE_RAW,
-        'objetivo' => FILTER_UNSAFE_RAW,
-        'temarioCompleto' => FILTER_UNSAFE_RAW,
-        'instructor' => FILTER_UNSAFE_RAW,
-        'tipoInstructor' => [
-            'filter' => FILTER_VALIDATE_INT,
-            'options' => ['min_range' => 1, 'max_range' => 2]
-        ],
-        'area' => FILTER_UNSAFE_RAW,
-        'fecha' => FILTER_UNSAFE_RAW
-    ]);
-
-    // Validar campos obligatorios
-    foreach ($data as $key => $value) {
-        if (empty($value)) {
-            throw new Exception("El campo $key es requerido", 400);
-        }
-    }
-
-    // Conexión a BD
-    $con = new LocalConector();
-    $conex = $con->conectar();
-    if (!$conex) throw new Exception("Error de conexión a BD", 500);
-
-    // Formateo de fechas
-    $fecha_mysql = date("Y-m-d H:i:s", strtotime($data['fecha']));
-    $fecha_creacion = (new DateTime('now', new DateTimeZone('America/Denver')))->format('Y-m-d H:i:s');
-/*
-    // Prepared statement
-    $stmt = $conex->prepare("INSERT INTO `Listas_Asistencias` 
-                            (`Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`) 
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, '', 1)");
-
-    if (!$stmt) throw new Exception("Error al preparar consulta: " . $conex->error, 500);
-
-    $stmt->bind_param(
-        "ssssisss",
-        $data['tema'],
-        $data['objetivo'],
-        $data['temarioCompleto'],
-        $data['instructor'],
-        $data['tipoInstructor'], // Ya validado como INT
-        $data['area'],
-        $fecha_mysql,
-        $fecha_creacion
-    );
-
-    if (!$stmt->execute()) {
-        throw new Exception("Error al ejecutar: " . $stmt->error, 500);
-    }
-
-    // Respuesta exitosa
-    echo json_encode([
-        'success' => true,
-        'folio' => $conex->insert_id,
-        'message' => 'Registro exitoso'
-    ]);
-*/
+    if ($registroExitoso) {
+        $idGenerado = $conex->insert_id;
+        echo json_encode([
+            'success' => true,
+            'message' => 'Registro exitoso',
+            'folio' => $idGenerado
+        ]);
+    } else {
+        throw new Exception("Error al ejecutar la consulta");
+    }*/
 } catch (Exception $e) {
-    http_response_code($e->getCode() ?: 500);
+    http_response_code(500);
+    error_log("Error en registro: " . $e->getMessage());
     echo json_encode([
         'success' => false,
-        'message' => $e->getMessage(),
-        'error_code' => $e->getCode()
+        'message' => 'Error en el servidor: ' . $e->getMessage()
     ]);
-    exit;
+}
+
+function registrarAsistencia($conex, $tema, $objetivo, $temarioCompleto, $instructor, $tipoInstructor, $area, $fecha) {
+    $Object = new DateTime();
+    $Object->setTimezone(new DateTimeZone('America/Denver'));
+    $DateAndTime = $Object->format("Y-m-d H:i:s"); // Formato corregido
+    $fecha_mysql = date("Y-m-d H:i:s", strtotime($fecha));
+
+    $stmt = $conex->prepare("INSERT INTO `Listas_Asistencias`(`Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`) 
+                            VALUES (?,?,?,?,?,?,?,?,'',1)");
+
+    if (!$stmt) {
+        throw new Exception("Error al preparar la consulta: " . $conex->error);
+    }
+
+    // TipoInstructor ahora es integer (i)
+    $stmt->bind_param("ssssisss", $tema, $objetivo, $temarioCompleto, $instructor, $tipoInstructor, $area, $fecha_mysql, $DateAndTime);
+    $resultado = $stmt->execute();
+    $stmt->close();
+
+    return $resultado;
 }
 ?>
