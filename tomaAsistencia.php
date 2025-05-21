@@ -221,6 +221,7 @@
 <script src="assets/vendor/js/menu.js"></script>
 <script src="assets/js/main.js"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     var id;
@@ -337,11 +338,19 @@
                 document.getElementById("closeModal").click();
                 llenadoTabla();
                 if (data.ya_registrado) {
-                    // Mostrar mensaje especial para usuario ya registrado
-                    alert('Ya estabas registrado previamente en esta lista');
+                    Swal.fire({
+                        icon: "success",
+                        title: "Ya estabas registrado",
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
                 } else if (data.success) {
-                    // Registro exitoso
-                    alert('Registro completado con éxito');
+                    Swal.fire({
+                        icon: "success",
+                        title: "Registrado",
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
                 } else {
                     // Otros errores
                     alert('Error: ' + data.message);
