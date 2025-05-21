@@ -1,9 +1,6 @@
 <?php
 require_once 'db/db_RH.php';
 
-// Habilita errores para depuración (quitar en producción)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -35,8 +32,6 @@ if (!$conex) {
 }
 
 try {
-    //echo "INSERT INTO `Listas_Asistencias`(`Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`)
-     //                       VALUES ('$tema','$objetivo','$temarioCompleto','$instructor','$tipoInstructor','$area','$fecha','$fecha','',1)";
 
     $registroExitoso = registrarAsistencia($conex, $tema, $objetivo, $temarioCompleto, $instructor, $tipoInstructor, $area, $fecha);
 
