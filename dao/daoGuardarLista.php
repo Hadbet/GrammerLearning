@@ -35,9 +35,9 @@ if (!$conex) {
 }
 
 try {
-    echo "INSERT INTO `Listas_Asistencias`(`Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`) 
-                            VALUES ('$tema','$objetivo','$temarioCompleto','$instructor','$tipoInstructor','$area','$fecha','$fecha','',1)";
-    /*
+    //echo "INSERT INTO `Listas_Asistencias`(`Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`)
+     //                       VALUES ('$tema','$objetivo','$temarioCompleto','$instructor','$tipoInstructor','$area','$fecha','$fecha','',1)";
+
     $registroExitoso = registrarAsistencia($conex, $tema, $objetivo, $temarioCompleto, $instructor, $tipoInstructor, $area, $fecha);
 
     if ($registroExitoso) {
@@ -49,7 +49,7 @@ try {
         ]);
     } else {
         throw new Exception("Error al ejecutar la consulta");
-    }*/
+    }
 } catch (Exception $e) {
     http_response_code(500);
     error_log("Error en registro: " . $e->getMessage());
