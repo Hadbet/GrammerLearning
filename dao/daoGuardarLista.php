@@ -41,7 +41,7 @@ try {
     // Formateo de fechas
     $fecha_mysql = date("Y-m-d H:i:s", strtotime($data['fecha']));
     $fecha_creacion = (new DateTime('now', new DateTimeZone('America/Denver')))->format('Y-m-d H:i:s');
-
+/*
     // Prepared statement
     $stmt = $conex->prepare("INSERT INTO `Listas_Asistencias` 
                             (`Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`) 
@@ -71,7 +71,7 @@ try {
         'folio' => $conex->insert_id,
         'message' => 'Registro exitoso'
     ]);
-
+*/
 } catch (Exception $e) {
     http_response_code($e->getCode() ?: 500);
     echo json_encode([
