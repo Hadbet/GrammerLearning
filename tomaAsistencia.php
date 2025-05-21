@@ -127,13 +127,13 @@
                                                             <div class="row">
                                                                 <div class="col-12 mb-3">
                                                                     <label for="nameWithTitle" class="form-label">Nomina</label>
-                                                                    <input type="text" id="nameWithTitle" class="form-control"/>
-                                                                    <button type="button" class="btn btn-primary mt-2">Verificar Numero de Nomina</button>
+                                                                    <input type="text" id="txtNomina" class="form-control"/>
+                                                                    <button type="button" onclick="verificarUsuario()" class="btn btn-primary mt-2">Verificar Numero de Nomina</button>
                                                                 </div>
 
                                                                 <div class="col-12 mb-3">
                                                                     <label for="nameWithTitle" class="form-label">Nombre</label>
-                                                                    <input type="text" id="nameWithTitle" class="form-control" readonly/>
+                                                                    <input type="text" id="txtNombre" class="form-control" readonly/>
                                                                 </div>
 
                                                             </div>
@@ -143,7 +143,7 @@
                                                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                                                 Cancelar
                                                             </button>
-                                                            <button type="button" class="btn btn-primary">Anotarme</button>
+                                                            <button type="button" id="btnAnotarme" class="btn btn-primary" disabled>Anotarme</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -262,6 +262,20 @@
 
         }
     });
+
+    function verificarUsuario(){
+
+        $.getJSON('https://grammermx.com/RH/GrammovilApp/inicio/dao/DaoUsuario.php?usuario=' + document.getElementById("txtNomina").value, function (data) {
+            if (data && data.data && data.data.length > 0) {
+                text = data.data[0].NomUser;
+                document.getElementById("txtNombre").value = text;
+                document.getElementById("btnAnotarme").disabled = true;
+            }else{
+                document.getElementById("btnAnotarme").disabled = false;
+            }
+        });
+
+    }
 
     function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
