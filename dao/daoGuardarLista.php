@@ -1,5 +1,5 @@
 <?php
-require_once 'db_RH.php';
+require_once 'db/db_RH.php';
 
 // Habilita errores para depuración (quitar en producción)
 error_reporting(E_ALL);
