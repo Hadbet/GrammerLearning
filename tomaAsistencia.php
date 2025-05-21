@@ -140,7 +140,7 @@
 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" id="closeModal">
                                                                 Cancelar
                                                             </button>
                                                             <button type="button" id="btnAnotarme" onclick="guardarAsistencia()" class="btn btn-primary" disabled>Anotarme</button>
@@ -334,6 +334,7 @@
         })
             .then(response => response.json())
             .then(data => {
+                document.getElementById("closeModal").click();
                 llenadoTabla();
                 if (data.ya_registrado) {
                     // Mostrar mensaje especial para usuario ya registrado
