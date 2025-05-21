@@ -330,6 +330,15 @@
           var area = document.getElementById("txtArea").value;
           var fecha = document.getElementById("txtFecha").value;
 
+          console.log("Datos a enviar:", {
+              tema: tema,
+              objetivo: objetivo,
+              temarioCompleto: temarioCompleto,
+              instructor: instructor,
+              tipoInstructor: tipoInstructor,
+              area: area,
+              fecha: fecha
+          });
 
           var formData = new FormData();
           formData.append('tema', tema);
@@ -380,8 +389,9 @@
                   }
               })
               .catch(error => {
-                  console.error('Error:', error);
-                  alert('Error al conectar con el servidor');
+                  const errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
+                  document.getElementById('toastErrorMessage').textContent = error.message;
+                  errorToast.show();
               });
 
 
