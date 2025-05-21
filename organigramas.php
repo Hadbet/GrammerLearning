@@ -388,11 +388,6 @@
                   } else {
                       alert('Error al guardar: ' + (data.message || 'Error desconocido'));
                   }
-              })
-              .catch(error => {
-                  const errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
-                  document.getElementById('toastErrorMessage').textContent = error.message;
-                  errorToast.show();
               });
 
 
