@@ -346,7 +346,7 @@
           formData.append('objetivo', objetivo);
           formData.append('temarioCompleto', temarioCompleto);
           formData.append('instructor', instructor);
-          formData.append('tipoInstructor', tipoInstructor);
+          formData.append('tipoInstructor', 1);
           formData.append('area', area);
           formData.append('fecha', fechaMySQL);
 
