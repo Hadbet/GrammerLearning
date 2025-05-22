@@ -416,7 +416,7 @@
             alert("No se encontro un numero de nomina valido");
         }else{
             var formData = new FormData();
-            formData.append('nomina', nomina);
+            formData.append('nomina', verificarNomina(nomina));
             formData.append('nombre', nombre);
             formData.append('folioLista', id);
 
@@ -426,7 +426,6 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById("closeModal").click();
                     llenadoTablaAsistencias();
                     if (data.ya_registrado) {
                         Swal.fire({
