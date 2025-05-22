@@ -229,7 +229,7 @@
 
   <script>
 
-
+      calificacionCurso();
 
       function calificacionCurso(){
 
