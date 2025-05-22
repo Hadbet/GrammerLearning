@@ -135,37 +135,9 @@
                       <h5 class="card-title m-0 me-2">Cursos pendientes</h5>
                     </div>
                     <div class="card-body">
-                      <ul class="p-0 m-0">
+                      <ul class="p-0 m-0" id="cursosPendientes">
 
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="assets/img/icons/rojo.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Obligatorio</small>
-                              <h6 class="mb-0">Combate contra incedios</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <a href="javascript:;" class="btn btn-sm btn-outline-primary">Ir al curso</a>
-                            </div>
-                          </div>
-                        </li>
 
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="assets/img/icons/rojo.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Asignado</small>
-                              <h6 class="mb-0">Evacuacion de inmuebles</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <a href="javascript:;" class="btn btn-sm btn-outline-primary">Ir al curso</a>
-                            </div>
-                          </div>
-                        </li>
 
                       </ul>
                     </div>
@@ -192,22 +164,7 @@
                               <h6 class="mb-0">Primeros Auxilios</h6>
                             </div>
                             <div class="user-progress d-flex align-items-center gap-1">
-                              <a href="javascript:;" class="btn btn-sm btn-outline-primary">Ir al curso</a>
-                            </div>
-                          </div>
-                        </li>
-
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="assets/img/icons/verde.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Asignado</small>
-                              <h6 class="mb-0">Documentacion Obligatoria</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <a href="javascript:;" class="btn btn-sm btn-outline-primary">Ir al curso</a>
+                              <a href="javascript:;" class="btn btn-sm btn-outline-primary">Ver Curso</a>
                             </div>
                           </div>
                         </li>
@@ -269,5 +226,42 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/dashboards-analytics.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  <script>
+
+
+
+      function calificacionCurso(){
+
+          var nomina = "00001606";
+          $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaListasByNomina.php?nomina=' + nomina, function (data) {
+
+
+              if (data && data.data && data.data.length > 0) {
+                  var tema = data.data[0].Tema;
+                  var tipoInstructor = data.data[0].TipoInstructor;
+                  var folio = data.data[0].IdLista;
+
+                  document.getElementById("cursosPendientes").appendChild("<li class=\"d-flex mb-4 pb-1\"> " +
+                                                            "<div class=\"avatar flex-shrink-0 me-3\"> " +
+                                                              "<img src=\"assets/img/icons/rojo.png\" alt=\"User\" class=\"rounded\"/> " +
+                                                              "</div> " +
+                                                              "<div class=\"d-flex w-100 flex-wrap align-items-center justify-content-between gap-2\"> " +
+                                                              "<div class=\"me-2\"> " +
+                                                              "<small class=\"text-muted d-block mb-1\">"+tipoInstructor+"</small> " +
+                                                              "<h6 class=\"mb-0\">"+tema+"</h6> " +
+                                                              "</div> " +
+                                                              "<div class=\"user-progress d-flex align-items-center gap-1\"> " +
+                                                              "<a href=\"https://grammermx.com/RH/GrammerLearning/toma_asistencia.php?idLista="+folio+"\" class=\"btn btn-sm btn-outline-primary\">Tomar Asistencia</a> " +
+                                                              "<a href=\"https://grammermx.com/RH/GrammerLearning/lista_asistencia.php?idLista="+folio+"\" class=\"btn btn-sm btn-outline-primary\">Ver curso</a> " +
+                                                              "</div> " +
+                                                              "</div> </li>");
+              }else{
+
+              }
+          });
+      }
+
+  </script>
   </body>
 </html>
