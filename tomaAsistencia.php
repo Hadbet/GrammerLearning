@@ -777,15 +777,15 @@
     }
 
     function verificarTag(tag){
-        if (tag.length===1){return "000000000"+nomina}
-        if (tag.length===2){return "00000000"+nomina}
-        if (tag.length===3){return "0000000"+nomina}
-        if (tag.length===4){return "000000"+nomina}
-        if (tag.length===5){return "00000"+nomina}
-        if (tag.length===6){return "0000"+nomina}
-        if (tag.length===7){return "000"+nomina}
-        if (tag.length===8){return "00"+nomina}
-        if (tag.length===9){return "0"+nomina}
+        if (tag.length===1){return "000000000"+tag}
+        if (tag.length===2){return "00000000"+tag}
+        if (tag.length===3){return "0000000"+tag}
+        if (tag.length===4){return "000000"+tag}
+        if (tag.length===5){return "00000"+tag}
+        if (tag.length===6){return "0000"+tag}
+        if (tag.length===7){return "000"+tag}
+        if (tag.length===8){return "00"+tag}
+        if (tag.length===9){return "0"+tag}
     }
 
     function getParameterByName(name) {
