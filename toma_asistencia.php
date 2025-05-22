@@ -76,6 +76,12 @@
                         <div class="col-lg-4 col-md-4 order-1">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12 mb-4">
+                                    <p class="bg-success text-white display-5 text-center" style="border-radius: 0.5rem" id="lblEstatusCurso">Curso Activo</p>
+                                    <p class="display-5 text-center">Acciones</p>
+                                    <button class="btn btn-success" onclick="actualizarEstatusCurso(1)">Activar curso</button>
+                                    <button class="btn btn-warning" onclick="actualizarEstatusCurso(2)">Cerrar curso</button>
+                                    <button class="btn btn-danger" onclick="actualizarEstatusCurso(3)">Cancelar curso</button>
+                                    <br><br>
                                     <img
                                         src="assets/img/illustrations/man-with-laptop-light.png"
                                         style="height: 100%"
@@ -159,6 +165,10 @@
                 var fechaCreacion = data.data[i].FechaCreacion;
                 var fechaCierre = data.data[i].FechaCierre;
                 var estatus = data.data[i].Estatus;
+
+                if (estatus == 1){document.getElementById("lblEstatusCurso").innerHTML="Curso Activo"}
+                if (estatus == 2){document.getElementById("lblEstatusCurso").innerHTML="Curso Cerrado"}
+                if (estatus == 3){document.getElementById("lblEstatusCurso").innerHTML="Curso Cancelado"}
 
                 document.getElementById("lblTema").innerHTML = tema;
                 document.getElementById("lblObjetivo").innerHTML = objetivo;
@@ -288,7 +298,6 @@
                             timer: 1000
                         });
                     } else {
-                        // Otros errores
                         alert('Error: ' + data.message);
                     }
                 });
@@ -309,16 +318,36 @@
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
             results = regex.exec(location.search);
-
-
         var cadena = results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-
         var arrTerminos = cadena.split(',');
-
-
         return arrTerminos[0];
     }
 
+    function actualizarEstatusCurso(estatus) {
+
+            var formData = new FormData();
+            formData.append('estatus', estatus);
+            formData.append('folioLista', id);
+
+            fetch('https://grammermx.com/RH/GrammerLearning/dao/daoActualizarEstatus.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Registrado",
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    } else {
+                        // Otros errores
+                        alert('Error: ' + data.message);
+                    }
+                });
+    }
 
 </script>
 </body>
