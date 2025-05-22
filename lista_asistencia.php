@@ -680,6 +680,25 @@
         }
     });
 
+    setInterval(refrescar, 5000);
+
+    function refrescar() {
+        $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaLista.php?idLista='+getParameterByName("idLista"), function (data) {
+
+            if (data && data.data && data.data.length > 0) {
+                for (var i = 0; i < data.data.length; i++) {
+                    var estatus = data.data[i].Estatus;
+                    actualizarLayoutEstados(estatus);
+                    //llenadoTabla();
+                    //llenadoTablaAsistencias();
+                    //calificacionCurso();
+                }
+            }else{
+
+            }
+        });
+    }
+
     function actualizarLayoutEstados(estatus) {
         const statusLabel = document.getElementById("lblEstatusCurso");
         const btnAnotarmeCurso = document.getElementById("btnAnotarmeCurso");
