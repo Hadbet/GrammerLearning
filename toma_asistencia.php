@@ -86,12 +86,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="container-xxl flex-grow-1 container-p-y" id="activo">
-                    <div class="row">
-                        <!-- Transactions -->
                         <div class="col-md-12 col-lg-12 order-2 mb-4">
                             <div class="card h-100">
                                 <div class="card-header d-flex align-items-center justify-content-between">
@@ -124,8 +119,10 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
+
                 <div class="content-backdrop fade"></div>
             </div>
             <!-- Content wrapper -->
