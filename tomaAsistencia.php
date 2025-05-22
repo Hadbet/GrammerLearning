@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="assets/css/demo.css" />
     <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="assets/vendor/js/helpers.js"></script>
     <script src="assets/js/config.js"></script>
     <style>
@@ -296,6 +297,34 @@
                 visibility: visible;
             }
         }
+
+        .star-rating {
+            font-size: 2rem;
+            color: #ddd; /* Color de estrellas vacías */
+        }
+
+        .star-rating i {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star-rating .active {
+            color: #ffc107; /* Color de estrellas activas (amarillo) */
+        }
+
+        .star-rating .half-active {
+            position: relative;
+        }
+
+        .star-rating .half-active:before {
+            content: '\f005';
+            color: #ffc107;
+            position: absolute;
+            left: 0;
+            width: 50%;
+            overflow: hidden;
+        }
+
     </style>
 </head>
 
@@ -451,6 +480,17 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12 mb-4">
                                     <p class="bg-success display-4 text-center text-white" style="border-radius: 0.5rem;">ABIERTO</p>
+
+                                    <p class="display-5 text-center" style="border-radius: 0.5rem;">Valoración del curso</p>
+                                    <div class="star-rating text-center mt-3" id="ratingContainer">
+                                        <i class="fas fa-star" data-rating="1"></i>
+                                        <i class="fas fa-star" data-rating="2"></i>
+                                        <i class="fas fa-star" data-rating="3"></i>
+                                        <i class="fas fa-star" data-rating="4"></i>
+                                        <i class="fas fa-star" data-rating="5"></i>
+                                        <span class="ms-2 rating-value" id="ratingValue">0.0</span>
+                                    </div>
+
                                     <img
                                             src="assets/img/illustrations/man-with-laptop-light.png"
                                             style="height: 100%"
@@ -868,12 +908,47 @@
                 timer: 1000
             });
         }
-
-
-
     }
 
+    function setStarRating(rating) {
+        const stars = document.querySelectorAll('#ratingContainer i');
+        const ratingValue = document.getElementById('ratingValue');
 
+        // Actualizar el valor numérico
+        ratingValue.textContent = rating.toFixed(1);
+
+        // Resetear todas las estrellas
+        stars.forEach(star => {
+            star.classList.remove('active', 'half-active');
+        });
+
+        // Activar estrellas completas
+        const fullStars = Math.floor(rating);
+        for (let i = 0; i < fullStars; i++) {
+            stars[i].classList.add('active');
+        }
+
+        // Activar media estrella si hay decimal
+        const decimal = rating - fullStars;
+        if (decimal > 0) {
+            stars[fullStars].classList.add('half-active');
+        }
+    }
+
+    function calificacionCurso(){
+        $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaPromedioCurso.php?idLista=' + id, function (data) {
+            if (data && data.data && data.data.length > 0) {
+                var promedio = data.data[0].Promedio;
+                var totalEvaluaciones = data.data[0].TotalEvaluaciones;
+                var calificacionMinima = data.data[0].CalificacionMinima;
+                var calificacionMaxima = data.data[0].CalificacionMaxima;
+                var promedioRedondeado = data.data[0].PromedioRedondeado;
+                setStarRating(promedioRedondeado);
+            }else{
+
+            }
+        });
+    }
 
 </script>
 </body>
