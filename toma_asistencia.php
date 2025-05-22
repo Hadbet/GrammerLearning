@@ -203,7 +203,7 @@
             case 1:
                 statusLabel.innerHTML = "Curso Activo";
                 statusLabel.className = `${baseClasses} bg-success`;
-                tomaAsistencia.style.display = "block";
+                tomaAsistencia.style.display = "flex";
                 break;
             case 2:
                 statusLabel.innerHTML = "Curso Cerrado";
