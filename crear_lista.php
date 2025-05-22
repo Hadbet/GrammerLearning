@@ -361,11 +361,9 @@
                       const baseUrl = 'https://grammermx.com/RH/GrammerLearning/lista_asistencia.php?idLista=';
                       const fullUrl = baseUrl + folio;
 
-                      // Configurar el modal
                       document.getElementById('folioNumber').textContent = folio;
                       document.getElementById('folioLink').value = fullUrl;
 
-                      // Generar QR
                       document.getElementById('qrCode').innerHTML = '';
                       new QRCode(document.getElementById('qrCode'), {
                           text: fullUrl,
@@ -373,11 +371,9 @@
                           height: 150
                       });
 
-                      // Mostrar modal
                       var modal = new bootstrap.Modal(document.getElementById('successModal'));
                       modal.show();
 
-                      // Configurar botón de copiar
                       document.getElementById('copyButton').addEventListener('click', function() {
                           const copyText = document.getElementById('folioLink');
                           copyText.select();
