@@ -76,7 +76,7 @@
                         <div class="col-lg-4 col-md-4 order-1">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12 mb-4">
-                                    <p class="bg-success text-white display-5 text-center" style="border-radius: 0.5rem" id="lblEstatusCurso">Curso Activo</p>
+                                    <p id="lblEstatusCurso">Curso Activo</p>
                                     <p class="display-5 text-center">Acciones</p>
                                     <button class="btn btn-success" onclick="actualizarEstatusCurso(1)">Activar curso</button>
                                     <button class="btn btn-warning" onclick="actualizarEstatusCurso(2)">Cerrar curso</button>
@@ -151,6 +151,9 @@
 
     $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaLista.php?idLista='+getParameterByName("idLista"), function (data) {
 
+        const statusLabel = document.getElementById("lblEstatusCurso");
+        const baseClasses = "text-white display-5 text-center";
+
         if (data && data.data && data.data.length > 0) {
             for (var i = 0; i < data.data.length; i++) {
 
@@ -166,9 +169,25 @@
                 var fechaCierre = data.data[i].FechaCierre;
                 var estatus = data.data[i].Estatus;
 
-                if (estatus == 1){document.getElementById("lblEstatusCurso").innerHTML="Curso Activo"}
-                if (estatus == 2){document.getElementById("lblEstatusCurso").innerHTML="Curso Cerrado"}
-                if (estatus == 3){document.getElementById("lblEstatusCurso").innerHTML="Curso Cancelado"}
+                switch(estatus) {
+                    case 1:
+                        statusLabel.innerHTML = "Curso Activo";
+                        statusLabel.className = `${baseClasses} bg-success`;
+                        break;
+                    case 2:
+                        statusLabel.innerHTML = "Curso Cerrado";
+                        statusLabel.className = `${baseClasses} bg-danger`;
+                        break;
+                    case 3:
+                        statusLabel.innerHTML = "Curso Cancelado";
+                        statusLabel.className = `${baseClasses} bg-secondary`;
+                        break;
+                    default:
+                        statusLabel.innerHTML = "Estado desconocido";
+                        statusLabel.className = `${baseClasses} bg-warning`;
+                }
+
+                statusLabel.style.borderRadius = "0.5rem";
 
                 document.getElementById("lblTema").innerHTML = tema;
                 document.getElementById("lblObjetivo").innerHTML = objetivo;
