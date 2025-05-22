@@ -380,7 +380,7 @@
                                                                     <div class="fr__face-mouth-lower" style="background: white;" data-mouth-lower></div>
                                                                     <div class="fr__face-mouth-upper" style="background: white;" data-mouth-upper></div>
                                                                 </div>
-                                                                <input onchange="rangosEstatus();" class="fr__input" id="face-rating" type="range" value="2.5" min="0" max="5"
+                                                                <input class="fr__input" id="face-rating" type="range" value="2.5" min="0" max="5"
                                                                        step="0.1">
                                                                 </div>
 
@@ -804,7 +804,7 @@
 
     function obtenerTag(nomina) {
         return new Promise((resolve, reject) => {
-            $.getJSON('https://grammermx.com/RH/GrammovilApp/inicio/dao/DaoUsuario.php?usuario=' + verificarNomina(nomina))
+            $.getJSON('https://grammermx.com/RH/GrammovilApp/inicio/dao/DaoUsuario.php?usuario=' + nomina)
                 .done(data => {
                     if (data?.data?.length > 0) {
                         resolve(data.data[0].IdTag);
