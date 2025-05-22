@@ -245,7 +245,7 @@
                       data.data.forEach(curso => {
                           if (!curso.Tema || !curso.IdLista) return;
 
-                          if (curso.Estatus==0){
+                          if (curso.Estatus==1){
                               const listItem = document.createElement('li');
                               listItem.className = 'd-flex mb-4 pb-1';
 
