@@ -48,7 +48,6 @@ try {
             throw new Exception("Error al actualizar la asistencia");
         }
     } else {
-        // 3. Si no existe, registramos nueva asistencia
         $registroExitoso = registrarAsistencia($conex, $nomina, $nombre, $folioLista);
 
         if ($registroExitoso) {
@@ -77,8 +76,8 @@ function registrarAsistencia($conex, $nomina, $nombre, $folioLista) {
     $Object->setTimezone(new DateTimeZone('America/Denver'));
     $DateAndTime = $Object->format("Y-m-d H:i:s");
 
-    $stmt = $conex->prepare("INSERT INTO `Asistencias`(`Nomina`, `Nombre`, `FolioLista`, `FechaRegistro`) 
-                            VALUES (?,?,?,?)");
+    $stmt = $conex->prepare("INSERT INTO `Asistencias`(`Nomina`, `Nombre`, `FolioLista`, `FechaRegistro`,`Estatus`,`Comentarios` ) 
+                            VALUES (?,?,?,?,1,'NA')");
 
     if (!$stmt) {
         throw new Exception("Error al preparar la consulta: " . $conex->error);
@@ -96,7 +95,7 @@ function actualizarAsistencia($conex, $nomina, $folioLista) {
     $Object->setTimezone(new DateTimeZone('America/Denver'));
     $DateAndTime = $Object->format("Y-m-d H:i:s");
 
-    $stmt = $conex->prepare("UPDATE `Asistencias` SET `Estatus`=1, `FechaAsistencia`=? 
+    $stmt = $conex->prepare("UPDATE `Asistencias` SET `Estatus`=1, `FechaAsistencia`=?,`Comentarios`='NA' 
                             WHERE `Nomina` = ? AND `FolioLista` = ?");
 
     if (!$stmt) {
