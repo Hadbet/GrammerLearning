@@ -26,7 +26,7 @@ if (!$conex) {
 
 try {
     $stmtVerificar = $conex->prepare("SELECT COUNT(*) AS existe FROM `Asistencias` 
-                                     WHERE `Nomina` = ? AND `FolioLista` = ? and `EvaluacionCurso` is not null");
+                                     WHERE `Nomina` = ? AND `FolioLista` = ? and `EvaluacionCurso` = 0");
     $stmtVerificar->bind_param("si", $nomina, $folioLista);
     $stmtVerificar->execute();
     $resultado = $stmtVerificar->get_result();
