@@ -828,8 +828,8 @@
         if (tagReal===tag){
 
             var formData = new FormData();
-            formData.append('nomina', rango);
-            formData.append('calificacion', nomina);
+            formData.append('nomina', nomina);
+            formData.append('calificacion', rango);
             formData.append('folioLista', id);
             formData.append('comentarios', comentarios);
 
