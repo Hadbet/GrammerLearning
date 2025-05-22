@@ -163,6 +163,7 @@
                 document.getElementById("lblTema").innerHTML = tema;
                 document.getElementById("lblObjetivo").innerHTML = objetivo;
                 document.getElementById("lblInstructor").innerHTML = instructor;
+                if (tipoInstructor==1){tipoInstructor="Interno"}else{tipoInstructor="Externo"}
                 document.getElementById("lblTipoInstructor").innerHTML = tipoInstructor;
                 document.getElementById("lblArea").innerHTML = area;
                 document.getElementById("lblFecha").innerHTML = fechaInicio;
