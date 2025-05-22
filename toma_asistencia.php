@@ -169,7 +169,7 @@
                 var fechaCierre = data.data[i].FechaCierre;
                 var estatus = data.data[i].Estatus;
 
-                switch(estatus) {
+                switch(parseInt(estatus)) {
                     case 1:
                         statusLabel.innerHTML = "Curso Activo";
                         statusLabel.className = `${baseClasses} bg-success`;
