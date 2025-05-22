@@ -38,7 +38,7 @@
                 <!-- Content -->
                 <div class="container-xxl flex-grow-1 container-p-y" id="espera">
                     <div class="row">
-                        <div class="col-lg-8 mb-4 order-0">
+                        <div class="col-lg-8 mb-1 order-0">
                             <div class="card">
                                 <div class="d-flex align-items-end row">
                                     <div class="col-sm-12">
@@ -159,16 +159,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-
-
-
-
-
-
-                <div class="container-xxl flex-grow-1 container-p-y" id="activo">
 
                     <div class="row">
                         <div class="col-md-12 col-lg-12 order-2 mb-4">
@@ -195,6 +185,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="content-backdrop fade"></div>
             </div>
             <!-- Content wrapper -->
