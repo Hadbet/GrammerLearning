@@ -358,7 +358,7 @@
               .then(data => {
                   if (data.success) {
                       const folio = data.folio;
-                      const baseUrl = 'https://grammermx.com/RH/GrammerLearning/tomaAsistencia.php?idLista=';
+                      const baseUrl = 'https://grammermx.com/RH/GrammerLearning/lista_asistencia.php?idLista=';
                       const fullUrl = baseUrl + folio;
 
                       // Configurar el modal
