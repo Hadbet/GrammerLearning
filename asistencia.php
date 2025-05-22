@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html
-        lang="en"
-        class="light-style layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
-        data-assets-path="../assets/"
-        data-template="vertical-menu-template-free"
+    lang="en"
+    class="light-style layout-menu-fixed"
+    dir="ltr"
+    data-theme="theme-default"
+    data-assets-path="../assets/"
+    data-template="vertical-menu-template-free"
 >
 <head>
     <meta charset="utf-8" />
@@ -16,8 +16,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-            rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/vendor/fonts/boxicons.css" />
     <link rel="stylesheet" href="assets/vendor/css/core.css" class="template-customizer-core-css" />
@@ -67,52 +67,6 @@
                                                 <dt class="col-sm-3 text-truncate">Fecha</dt>
                                                 <dd class="col-sm-9" id="lblFecha"></dd>
                                             </dl>
-
-
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
-                                                Anotarme al curso
-                                            </button>
-
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="modalCenterTitle">Primero verifica tu nomina</h5>
-                                                            <button
-                                                                    type="button"
-                                                                    class="btn-close"
-                                                                    data-bs-dismiss="modal"
-                                                                    aria-label="Close"
-                                                            ></button>
-                                                        </div>
-                                                        <div class="modal-body">
-
-                                                            <div class="row">
-                                                                <div class="col-12 mb-3">
-                                                                    <label for="nameWithTitle" class="form-label">Nomina</label>
-                                                                    <input type="text" id="txtNomina" class="form-control"/>
-                                                                    <button type="button" onclick="verificarUsuario()" class="btn btn-primary mt-2">Verificar Numero de Nomina</button>
-                                                                </div>
-
-                                                                <div class="col-12 mb-3">
-                                                                    <label for="nameWithTitle" class="form-label">Nombre</label>
-                                                                    <input type="text" id="txtNombre" class="form-control" readonly/>
-                                                                </div>
-
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" id="closeModal">
-                                                                Cancelar
-                                                            </button>
-                                                            <button type="button" id="btnAnotarme" onclick="guardarAsistencia()" class="btn btn-primary" disabled>Anotarme</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </div>
                                     </div>
 
@@ -123,60 +77,36 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12 mb-4">
                                     <img
-                                            src="assets/img/illustrations/man-with-laptop-light.png"
-                                            style="height: 100%"
-                                            alt="View Badge User"
-                                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                                            data-app-light-img="illustrations/man-with-laptop-light.png"
+                                        src="assets/img/illustrations/man-with-laptop-light.png"
+                                        style="height: 100%"
+                                        alt="View Badge User"
+                                        data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                                        data-app-light-img="illustrations/man-with-laptop-light.png"
                                     />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <!-- Transactions -->
-                        <div class="col-md-12 col-lg-12 order-2 mb-4">
-                            <div class="card h-100">
-                                <div class="card-header d-flex align-items-center justify-content-between">
-                                    <h5 class="card-title m-0 me-2">Inscritos en el curso</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive text-nowrap mt-2">
-                                        <table class="table table-bordered" id="temario-table">
-                                            <thead>
-                                            <tr>
-                                                <th>Nomina</th>
-                                                <th>Nombre</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-
-
-
-
-
-
-
                 <div class="container-xxl flex-grow-1 container-p-y" id="activo">
-
                     <div class="row">
+                        <!-- Transactions -->
                         <div class="col-md-12 col-lg-12 order-2 mb-4">
                             <div class="card h-100">
                                 <div class="card-header d-flex align-items-center justify-content-between">
-                                    <h5 class="card-title m-0 me-2">Personas que asistieron</h5>
+                                    <h5 class="card-title m-0 me-2">Tomar asistencia</h5>
                                 </div>
                                 <div class="card-body">
+
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="basic-default-name">Escanea o escribe tu nomina</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="txtNominaAsistencia" />
+                                        </div>
+                                        <button type="button" id="btnAsistencia" onclick="actualizarAsistencia()" class="btn btn-primary col-sm-1">Registrar</button>
+                                    </div>
+
                                     <div class="table-responsive text-nowrap mt-2">
                                         <table class="table table-bordered" id="asistencia-table">
                                             <thead>
@@ -190,6 +120,7 @@
                                             </tbody>
                                         </table>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -257,41 +188,6 @@
         }
     });
 
-    function llenadoTabla() {
-        const tabla = document.getElementById('temario-table').getElementsByTagName('tbody')[0];
-        tabla.innerHTML = '';
-
-        $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaAsistentes.php?idLista='+getParameterByName("idLista"), function(data) {
-            if (data && data.data && data.data.length > 0) {
-                for (var i = 0; i < data.data.length; i++) {
-                    const fila = tabla.insertRow();
-
-                    const celdaNomina = fila.insertCell(0);
-                    const celdaNombre = fila.insertCell(1);
-
-                    celdaNomina.textContent = data.data[i].Nomina;
-                    celdaNombre.textContent = data.data[i].Nombre;
-
-                    fila.classList.add('fila-asistente');
-                    celdaNomina.classList.add('text-center');
-                }
-            } else {
-                const fila = tabla.insertRow();
-                const celda = fila.insertCell(0);
-                celda.colSpan = 2;
-                celda.textContent = 'No hay asistentes registrados';
-                celda.classList.add('text-center', 'text-muted');
-            }
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.error("Error al obtener datos:", textStatus, errorThrown);
-            const fila = tabla.insertRow();
-            const celda = fila.insertCell(0);
-            celda.colSpan = 2;
-            celda.textContent = 'Error al cargar los datos';
-            celda.classList.add('text-center', 'text-danger');
-        });
-    }
-
     function llenadoTablaAsistencias() {
         const tabla = document.getElementById('asistencia-table').getElementsByTagName('tbody')[0];
         tabla.innerHTML = '';
@@ -344,45 +240,62 @@
 
     }
 
-    function guardarAsistencia() {
-
-        var nomina = document.getElementById("txtNomina").value;
-        var nombre = document.getElementById("txtNombre").value;
-
-        var formData = new FormData();
-        formData.append('nomina', nomina);
-        formData.append('nombre', nombre);
-        formData.append('folioLista', id);
-
-        fetch('https://grammermx.com/RH/GrammerLearning/dao/daoGuardarAsistencia.php', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("closeModal").click();
-                llenadoTabla();
-                if (data.ya_registrado) {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Ya estabas registrado",
-                        showConfirmButton: false,
-                        timer: 1000
-                    });
-                } else if (data.success) {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Registrado",
-                        showConfirmButton: false,
-                        timer: 1000
-                    });
-                } else {
-                    // Otros errores
-                    alert('Error: ' + data.message);
-                }
-            });
+    function obtenerNombre(nomina) {
+        return new Promise((resolve, reject) => {
+            $.getJSON('https://grammermx.com/RH/GrammovilApp/inicio/dao/DaoUsuario.php?usuario=' + verificarNomina(nomina))
+                .done(data => {
+                    if (data?.data?.length > 0) {
+                        resolve(data.data[0].NomUser);
+                    } else {
+                        resolve("");
+                    }
+                })
+                .fail(() => resolve(""));
+        });
     }
 
+    async function actualizarAsistencia() {
+
+        var nomina = document.getElementById("txtNominaAsistencia").value;
+        var nombre = await obtenerNombre(nomina);
+
+        if (nombre ===""){
+            alert("No se encontro un numero de nomina valido");
+        }else{
+            var formData = new FormData();
+            formData.append('nomina', verificarNomina(nomina));
+            formData.append('nombre', nombre);
+            formData.append('folioLista', id);
+
+            fetch('https://grammermx.com/RH/GrammerLearning/dao/daoActualizarAsistencia.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    llenadoTablaAsistencias();
+                    llenadoTabla();
+                    if (data.ya_registrado) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Ya estabas registrado",
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    } else if (data.success) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Registrado",
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    } else {
+                        // Otros errores
+                        alert('Error: ' + data.message);
+                    }
+                });
+        }
+    }
 
     function verificarNomina(nomina){
         if (nomina.length===1){return "0000000"+nomina}
