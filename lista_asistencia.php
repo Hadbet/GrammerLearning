@@ -369,7 +369,7 @@
                                             </dl>
 
 
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                            <button id="btnAnotarmeCurso" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
                                                 Anotarme al curso
                                             </button>
 
@@ -479,7 +479,7 @@
                         <div class="col-lg-4 col-md-4 order-1">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12 mb-4">
-                                    <p class="bg-success display-4 text-center text-white" style="border-radius: 0.5rem;">ABIERTO</p>
+                                    <p id="lblEstatusCurso"></p>
 
                                     <p class="display-5 text-center" style="border-radius: 0.5rem;">Valoración del curso</p>
                                     <div class="star-rating text-center mt-3" id="ratingContainer">
@@ -653,7 +653,7 @@
                 var fechaCreacion = data.data[i].FechaCreacion;
                 var fechaCierre = data.data[i].FechaCierre;
                 var estatus = data.data[i].Estatus;
-
+                actualizarLayoutEstados(estatus);
                 document.getElementById("lblTema").innerHTML = tema;
                 document.getElementById("lblObjetivo").innerHTML = objetivo;
                 document.getElementById("lblInstructor").innerHTML = instructor;
@@ -679,6 +679,36 @@
 
         }
     });
+
+    function actualizarLayoutEstados(estatus) {
+        const statusLabel = document.getElementById("lblEstatusCurso");
+        const btnAnotarmeCurso = document.getElementById("btnAnotarmeCurso");
+        const baseClasses = "text-white display-5 text-center";
+
+        switch(parseInt(estatus)) {
+            case 1:
+                statusLabel.innerHTML = "Curso Activo";
+                statusLabel.className = `${baseClasses} bg-success`;
+                btnAnotarmeCurso.style.display = "inline-block";
+                break;
+            case 2:
+                statusLabel.innerHTML = "Curso Cerrado";
+                statusLabel.className = `${baseClasses} bg-danger`;
+                btnAnotarmeCurso.style.display = "none";
+                break;
+            case 3:
+                statusLabel.innerHTML = "Curso Cancelado";
+                statusLabel.className = `${baseClasses} bg-secondary`;
+                btnAnotarmeCurso.style.display = "none";
+                break;
+            default:
+                statusLabel.innerHTML = "Estado desconocido";
+                statusLabel.className = `${baseClasses} bg-warning`;
+                btnAnotarmeCurso.style.display = "none";
+        }
+
+        statusLabel.style.borderRadius = "0.5rem";
+    }
 
     function llenadoTabla() {
         const tabla = document.getElementById('temario-table').getElementsByTagName('tbody')[0];
