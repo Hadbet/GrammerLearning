@@ -1,0 +1,15 @@
+{
+    "line awesome brands": {
+        "normal": "line_awesome_brands_normal_f905f0dcb962dd842eea02bb4f9eee69"
+    },
+    "line awesome free": {
+        "normal": "\/home\/u543707098\/domains\/arketipo.mx\/public_html\/Produccion\/ML\/PW_MetrologyLaboratory\/librerias\/dompdf\/vendor\/dompdf\/dompdf\/lib\/fonts\/line_awesome_free_normal_967a0922d505961af7c5cdf6c50fd81e",
+        "900": "line_awesome_free_900_03518a78e82e89adf0bdd3560d8fbb29"
+    },
+    "assistant": {
+        "300": "\/home\/u909553968\/domains\/grammermx.com\/public_html\/RH\/Cursos\/lib\/dompdf\/vendor\/dompdf\/dompdf\/lib\/fonts\/assistant_300_6ba99ab416f864cf6221d37a1a2a98be",
+        "normal": "\/home\/u909553968\/domains\/grammermx.com\/public_html\/RH\/Cursos\/lib\/dompdf\/vendor\/dompdf\/dompdf\/lib\/fonts\/assistant_normal_5b3755218e388477df5dd897604d6f2a",
+        "500": "\/home\/u909553968\/domains\/grammermx.com\/public_html\/RH\/Cursos\/lib\/dompdf\/vendor\/dompdf\/dompdf\/lib\/fonts\/assistant_500_273f69122d1af9cc01b96551cb566cd8",
+        "bold": "assistant_bold_711160ce51ff6f12f5f7e26c504b3f6b"
+    }
+}

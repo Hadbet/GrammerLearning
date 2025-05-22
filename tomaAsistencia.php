@@ -373,7 +373,7 @@
                                                 Anotarme al curso
                                             </button>
 
-                                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                            <button type="button" class="btn btn-secondary" onclick="descargarPDF()">
                                                 Descargar lista
                                             </button>
 
@@ -949,6 +949,11 @@
 
             }
         });
+    }
+
+    function descargarPDF(){
+        var link = "https://grammermx.com/RH/GrammerLearning/pruebaPDF.php?id="+id;
+        window.open(link, '_blank');
     }
 
 </script>
