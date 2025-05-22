@@ -100,7 +100,7 @@
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">Cumplidos</span>
-                          <h3 class="card-title mb-2">12</h3>
+                          <h3 class="card-title mb-2" id="lblCumplidos"></h3>
                           <small class="text-success fw-semibold">cursos</small>
                         </div>
                       </div>
@@ -118,7 +118,7 @@
                             </div>
                           </div>
                           <span>Pendientes</span>
-                          <h3 class="card-title text-nowrap mb-1">20</h3>
+                          <h3 class="card-title text-nowrap mb-1" id="lblPendientes"></h3>
                           <small class="text-danger fw-semibold"> cursos</small>
                         </div>
                       </div>
@@ -154,20 +154,6 @@
                     <div class="card-body">
                       <ul class="p-0 m-0" id="cursosConcluidos">
 
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="assets/img/icons/verde.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Obligatorio</small>
-                              <h6 class="mb-0">Primeros Auxilios</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <a href="javascript:;" class="btn btn-sm btn-outline-primary">Ver Curso</a>
-                            </div>
-                          </div>
-                        </li>
 
                       </ul>
                     </div>
@@ -235,6 +221,8 @@
           const nomina = "00001606";
           const cursosContainer = document.getElementById("cursosPendientes");
           const cursosConcluidos = document.getElementById("cursosConcluidos");
+          var total = 0;
+          var pendientes = 0;
 
           $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaListasByNomina.php?nomina=' + nomina)
               .done(function(data) {
@@ -244,8 +232,10 @@
                       cursosConcluidos.innerHTML = '';
                       data.data.forEach(curso => {
                           if (!curso.Tema || !curso.IdLista) return;
+                          total++;
 
                           if (curso.Estatus==1){
+                              pendientes++;
                               const listItem = document.createElement('li');
                               listItem.className = 'd-flex mb-4 pb-1';
 
@@ -289,6 +279,8 @@
                           }
                           // Crear elementos DOM de forma segura
                       });
+                      document.getElementById("lblCumplidos").innerHTML = total-pendientes;
+                      document.getElementById("lblPendientes").innerHTML = pendientes;
                   } else {
                       cursosContainer.innerHTML = '<li class="text-muted">No hay cursos pendientes</li>';
                       cursosConcluidos.innerHTML = '<li class="text-muted">No hay cursos pendientes</li>';
