@@ -167,7 +167,7 @@
                 var fechaCreacion = data.data[i].FechaCreacion;
                 var fechaCierre = data.data[i].FechaCierre;
                 var estatus = data.data[i].Estatus;
-
+                actualizarLayoutEstados(estatus);
                 document.getElementById("lblTema").innerHTML = tema;
                 document.getElementById("lblObjetivo").innerHTML = objetivo;
                 document.getElementById("lblInstructor").innerHTML = instructor;
