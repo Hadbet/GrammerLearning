@@ -356,7 +356,7 @@
 
     function obtenerNombre(nomina) {
         return new Promise((resolve, reject) => {
-            $.getJSON('https://grammermx.com/RH/GrammovilApp/inicio/dao/DaoUsuario.php?usuario=' + nomina)
+            $.getJSON('https://grammermx.com/RH/GrammovilApp/inicio/dao/DaoUsuario.php?usuario=' + verificarNomina(nomina))
                 .done(data => {
                     if (data?.data?.length > 0) {
                         resolve(data.data[0].NomUser);
