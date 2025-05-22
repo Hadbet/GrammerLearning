@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="card-body">
 
-                                    <div class="row mb-3">
+                                    <div class="row mb-3" id="layoutTomaAsistencia">
                                         <label class="col-sm-2 col-form-label" for="basic-default-name">Escanea o escribe tu nomina</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="txtNominaAsistencia" />
@@ -151,8 +151,7 @@
 
     $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaLista.php?idLista='+getParameterByName("idLista"), function (data) {
 
-        const statusLabel = document.getElementById("lblEstatusCurso");
-        const baseClasses = "text-white display-5 text-center";
+
 
         if (data && data.data && data.data.length > 0) {
             for (var i = 0; i < data.data.length; i++) {
@@ -168,26 +167,6 @@
                 var fechaCreacion = data.data[i].FechaCreacion;
                 var fechaCierre = data.data[i].FechaCierre;
                 var estatus = data.data[i].Estatus;
-
-                switch(parseInt(estatus)) {
-                    case 1:
-                        statusLabel.innerHTML = "Curso Activo";
-                        statusLabel.className = `${baseClasses} bg-success`;
-                        break;
-                    case 2:
-                        statusLabel.innerHTML = "Curso Cerrado";
-                        statusLabel.className = `${baseClasses} bg-danger`;
-                        break;
-                    case 3:
-                        statusLabel.innerHTML = "Curso Cancelado";
-                        statusLabel.className = `${baseClasses} bg-secondary`;
-                        break;
-                    default:
-                        statusLabel.innerHTML = "Estado desconocido";
-                        statusLabel.className = `${baseClasses} bg-warning`;
-                }
-
-                statusLabel.style.borderRadius = "0.5rem";
 
                 document.getElementById("lblTema").innerHTML = tema;
                 document.getElementById("lblObjetivo").innerHTML = objetivo;
@@ -214,6 +193,36 @@
 
         }
     });
+
+    function actualizarLayoutEstados(estatus) {
+        const statusLabel = document.getElementById("lblEstatusCurso");
+        const tomaAsistencia = document.getElementById("layoutTomaAsistencia");
+        const baseClasses = "text-white display-5 text-center";
+
+        switch(parseInt(estatus)) {
+            case 1:
+                statusLabel.innerHTML = "Curso Activo";
+                statusLabel.className = `${baseClasses} bg-success`;
+                tomaAsistencia.style.display = "block";
+                break;
+            case 2:
+                statusLabel.innerHTML = "Curso Cerrado";
+                statusLabel.className = `${baseClasses} bg-danger`;
+                tomaAsistencia.style.display = "none";
+                break;
+            case 3:
+                statusLabel.innerHTML = "Curso Cancelado";
+                statusLabel.className = `${baseClasses} bg-secondary`;
+                tomaAsistencia.style.display = "none";
+                break;
+            default:
+                statusLabel.innerHTML = "Estado desconocido";
+                statusLabel.className = `${baseClasses} bg-warning`;
+                tomaAsistencia.style.display = "none";
+        }
+
+        statusLabel.style.borderRadius = "0.5rem";
+    }
 
     function llenadoTablaAsistencias() {
         const tabla = document.getElementById('asistencia-table').getElementsByTagName('tbody')[0];
@@ -357,10 +366,11 @@
                     if (data.success) {
                         Swal.fire({
                             icon: "success",
-                            title: "Registrado",
+                            title: "Estatus Actualizado",
                             showConfirmButton: false,
                             timer: 1000
                         });
+                        actualizarLayoutEstados(estatus);
                     } else {
                         // Otros errores
                         alert('Error: ' + data.message);

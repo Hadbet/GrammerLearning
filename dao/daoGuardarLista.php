@@ -62,7 +62,7 @@ function registrarAsistencia($conex, $tema, $objetivo, $temarioCompleto, $instru
     $fecha_mysql = date("Y-m-d H:i:s", strtotime($fecha));
 
     $stmt = $conex->prepare("INSERT INTO `Listas_Asistencias`(`Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`, `Creador`) 
-                            VALUES (?,?,?,?,?,?,?,?,'',1,?)");
+                            VALUES (?,?,?,?,?,?,?,?,'',0,?)");
 
     if (!$stmt) {
         throw new Exception("Error al preparar la consulta: " . $conex->error);
