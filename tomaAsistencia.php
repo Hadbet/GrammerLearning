@@ -934,7 +934,7 @@
             stars[fullStars].classList.add('half-active');
         }
     }
-
+    calificacionCurso();
     function calificacionCurso(){
         $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaPromedioCurso.php?idLista=' + id, function (data) {
             if (data && data.data && data.data.length > 0) {
@@ -943,7 +943,7 @@
                 var calificacionMinima = data.data[0].CalificacionMinima;
                 var calificacionMaxima = data.data[0].CalificacionMaxima;
                 var promedioRedondeado = data.data[0].PromedioRedondeado;
-                setStarRating(promedioRedondeado);
+                setStarRating(parseFloat(promedioRedondeado));
             }else{
 
             }
