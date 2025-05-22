@@ -952,7 +952,7 @@
     }
 
     function descargarPDF(){
-        var link = "https://grammermx.com/RH/GrammerLearning/pruebaPDF.php?id="+id;
+        var link = "https://grammermx.com/RH/GrammerLearning/PDF.php?id="+id;
         window.open(link, '_blank');
     }
 
