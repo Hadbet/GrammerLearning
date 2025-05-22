@@ -673,6 +673,7 @@
                 document.getElementById("lblTemario").innerHTML = htmlLista;
                 llenadoTabla();
                 llenadoTablaAsistencias();
+                calificacionCurso();
             }
         }else{
 
@@ -934,7 +935,7 @@
             stars[fullStars].classList.add('half-active');
         }
     }
-    calificacionCurso();
+
     function calificacionCurso(){
         $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaPromedioCurso.php?idLista=' + id, function (data) {
             if (data && data.data && data.data.length > 0) {
