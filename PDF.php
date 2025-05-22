@@ -13,7 +13,7 @@ $id = $query_params['id'];// Extraer el ID de la prueba
 $con = new LocalConector();
 $conex = $con->conectar();
 
-$datos = mysqli_query($conex, "SELECT `IdAsistencia`, `Nomina`, `Nombre`, `FolioLista`, `FechaRegistro`, `Estatus`, `EvaluacionCurso`, `EvaluacionInstructor`, `Comentarios`, `FechaAsistencia` FROM `Asistencias` WHERE `FolioLista` = '$id''");
+$datos = mysqli_query($conex, "SELECT `IdAsistencia`, `Nomina`, `Nombre`, `FolioLista`, `FechaRegistro`, `Estatus`, `EvaluacionCurso`, `EvaluacionInstructor`, `Comentarios`, `FechaAsistencia` FROM `Asistencias` WHERE `FolioLista` = '$id'");
 $resultados = mysqli_fetch_all($datos, MYSQLI_ASSOC);
 
 $selectQuery = "SELECT `IdLista`, `Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`, `Creador` FROM `Listas_Asistencias` WHERE `IdLista` = '$id'";
@@ -38,7 +38,6 @@ ob_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="assets/images/iconoarriba.png"/>
     <title>GRAMMER RH</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
