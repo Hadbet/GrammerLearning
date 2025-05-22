@@ -112,8 +112,6 @@
                                                   </tbody>
                                               </table>
                                           </div>
-
-                                          <button id="exportar-temario" class="btn btn-primary mt-3">Generar Variable Temario</button>
                                       </div>
                                       <div class="mb-3">
                                           <label class="form-label" for="basic-default-phone">Intructor</label>
