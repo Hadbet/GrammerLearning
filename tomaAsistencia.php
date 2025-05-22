@@ -26,6 +26,277 @@
     <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <script src="assets/vendor/js/helpers.js"></script>
     <script src="assets/js/config.js"></script>
+    <style>
+        .fr {
+            animation: fade-slide-in 0.6s ease-out;
+            padding: 0 1.5em;
+        }
+
+        .fr__face {
+            --face-hue1: 60;
+            --face-hue2: 30;
+            background-image:
+                    linear-gradient(135deg,
+                    hsl(var(--face-hue1), 90%, 55%),
+                    hsl(var(--face-hue2), 90%, 45%));
+            border-radius: 50%;
+            box-shadow: 0 0.5em 0.75em hsla(var(--face-hue2), 90%, 55%, 0.3);
+            margin: 0 auto 2em;
+            position: relative;
+            width: 3em;
+            height: 3em;
+        }
+
+        .fr__face-right-eye,
+        .fr__face-left-eye,
+        .fr__face-mouth-lower,
+        .fr__face-mouth-upper {
+            position: absolute;
+            transition:
+                    background-color var(--trans-dur),
+                    box-shadow var(--trans-dur),
+                    color var(--trans-dur);
+        }
+
+        .fr__face-right-eye,
+        .fr__face-left-eye {
+            background-color: var(--white);
+            border-radius: 50%;
+            top: 0.75em;
+            width: 0.6em;
+            height: 0.6em;
+        }
+
+        .fr__face-right-eye {
+            --delay-right: 0s;
+            animation: right-eye 1s var(--delay-right) linear paused;
+            clip-path: polygon(0 75%, 100% 0, 100% 100%, 0 100%);
+            left: 0.6em;
+        }
+
+        .fr__face-left-eye {
+            --delay-left: 0s;
+            animation: left-eye 1s var(--delay-left) linear paused;
+            clip-path: polygon(0 0, 100% 75%, 100% 100%, 0 100%);
+            right: 0.6em;
+        }
+
+        .fr__face-mouth-lower,
+        .fr__face-mouth-upper {
+            color: var(--white);
+            top: 1.75em;
+            left: 0.75em;
+            width: 1.5em;
+            height: 0.75em;
+        }
+
+        .fr__face-mouth-lower {
+            --delay-mouth-lower: 0s;
+            animation: mouth-lower 1s var(--delay-mouth-lower) linear paused;
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            box-shadow: 0 0.125em 0 inset;
+        }
+
+        .fr__face-mouth-upper {
+            --delay-mouth-upper: 0s;
+            animation: mouth-upper 1s var(--delay-mouth-upper) linear paused;
+            border-radius: 0 0 50% 50% / 0 0 100% 100%;
+            box-shadow: 0 -0.125em 0 inset;
+        }
+
+        .fr__label {
+            display: block;
+            margin-bottom: 1.5em;
+            text-align: center;
+        }
+
+        .fr__input {
+            --input-hue: 60;
+            --percent: 50%;
+            background-color: var(--gray1);
+            background-image: linear-gradient(hsl(var(--input-hue), 90%, 45%), hsl(var(--input-hue), 90%, 45%));
+            background-size: var(--percent) 100%;
+            background-repeat: no-repeat;
+            border-radius: 0.25em;
+            display: block;
+            margin: 0.5em auto;
+            width: 100%;
+            max-width: 10em;
+            height: 0.5em;
+            transition: background-color var(--trans-dur);
+            -webkit-appearance: none;
+            appearance: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .fr__input:focus {
+            outline: transparent;
+        }
+
+        .fr__input::-webkit-slider-thumb {
+            background-color: var(--white);
+            border: 0;
+            border-radius: 50%;
+            box-shadow: 0 0.125em 0.5em hsl(0, 0%, 0%, 0.3);
+            width: 1.5em;
+            height: 1.5em;
+            transition: background-color 0.15s linear;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .fr__input:focus::-webkit-slider-thumb,
+        .fr__input::-webkit-slider-thumb:hover {
+            background-color: var(--lt-gray);
+        }
+
+        .fr__input::-moz-range-thumb {
+            background-color: var(--white);
+            border: 0;
+            border-radius: 50%;
+            box-shadow: 0 0.125em 0.5em hsl(0, 0%, 0%, 0.3);
+            width: 1.5em;
+            height: 1.5em;
+            transition: background-color 0.15s linear;
+        }
+
+        .fr__input:focus::-moz-range-thumb,
+        .fr__input::-moz-range-thumb:hover {
+            background-color: var(--lt-gray);
+        }
+
+        @supports selector(:focus-visible) {
+            .fr__input:focus::-webkit-slider-thumb {
+                background-color: var(--white);
+            }
+
+            .fr__input:focus-visible::-webkit-slider-thumb,
+            .fr__input::-webkit-slider-thumb:hover {
+                background-color: var(--lt-gray);
+            }
+
+            .fr__input:focus::-moz-range-thumb {
+                background-color: var(--white);
+            }
+
+            .fr__input:focus-visible::-moz-range-thumb,
+            .fr__input::-moz-range-thumb:hover {
+                background-color: var(--lt-gray);
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: var(--gray1);
+            }
+
+            .fr__face-right-eye,
+            .fr__face-left-eye {
+            }
+
+            .fr__face-mouth-lower,
+            .fr__face-mouth-upper {
+            }
+
+            .fr__input {
+            }
+        }
+
+        @keyframes fade-slide-in {
+
+            from,
+            16.67% {
+                opacity: 0;
+                transform: translateY(25%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes right-eye {
+            from {
+                clip-path: polygon(0 75%, 100% 0, 100% 100%, 0 100%);
+            }
+
+            50%,
+            to {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+
+        @keyframes left-eye {
+            from {
+                clip-path: polygon(0 0, 100% 75%, 100% 100%, 0 100%);
+            }
+
+            50%,
+            to {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+
+        @keyframes mouth-lower {
+            from {
+                border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+                top: 1.75em;
+                height: 0.75em;
+                visibility: visible;
+            }
+
+            40% {
+                border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+                top: 1.95em;
+                height: 0.25em;
+                visibility: visible;
+            }
+
+            50%,
+            to {
+                border-radius: 0;
+                top: 2em;
+                height: 0.125em;
+                visibility: hidden;
+            }
+        }
+
+        @keyframes mouth-upper {
+            from,
+            50% {
+                border-radius: 0;
+                box-shadow: 0 -0.125em 0 inset;
+                top: 2em;
+                height: 0.125em;
+                visibility: hidden;
+            }
+
+            62.5% {
+                border-radius: 0 0 50% 50% / 0 0 100% 100%;
+                box-shadow: 0 -0.125em 0 inset;
+                top: 1.95em;
+                height: 0.25em;
+                visibility: visible;
+            }
+
+            75% {
+                border-radius: 0 0 50% 50% / 0 0 100% 100%;
+                box-shadow: 0 -0.125em 0 inset;
+                top: 1.825em;
+                height: 0.5em;
+                visibility: visible;
+            }
+
+            to {
+                border-radius: 0 0 50% 50% / 0 0 100% 100%;
+                box-shadow: 0 -0.8em 0 inset;
+                top: 1.75em;
+                height: 0.75em;
+                visibility: visible;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -72,6 +343,63 @@
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
                                                 Anotarme al curso
                                             </button>
+
+                                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                                Descargar lista
+                                            </button>
+
+                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCalificacion">
+                                                Calificar Curso
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="modalCalificacion" tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalCenterTitle">Calificar Curso</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row g-2">
+                                                                <div class="col mb-0">
+                                                                    <label for="emailWithTitle" class="form-label">Nomina</label>
+                                                                    <input type="text" id="txtNominaCalificacion" class="form-control"/>
+                                                                </div>
+                                                                <div class="col mb-0">
+                                                                    <label for="dobWithTitle" class="form-label">Tag</label>
+                                                                    <input type="text" id="txtTagCalificacion" class="form-control"/>
+                                                                </div>
+                                                                <div class="col-12 mb-0">
+
+                                                                    <br>
+                                                                <label class="fr__label" for="face-rating" style='color: dimgray;'>¿Que tan agradable ah sido tu experiencia?</label>
+                                                                <div class="fr__face" role="img" aria-label="Straight face">
+                                                                    <div class="fr__face-right-eye" style="background: white;" data-right></div>
+                                                                    <div class="fr__face-left-eye" style="background: white;" data-left></div>
+                                                                    <div class="fr__face-mouth-lower" style="background: white;" data-mouth-lower></div>
+                                                                    <div class="fr__face-mouth-upper" style="background: white;" data-mouth-upper></div>
+                                                                </div>
+                                                                <input onchange="rangosEstatus();" class="fr__input" id="face-rating" type="range" value="2.5" min="0" max="5"
+                                                                       step="0.1">
+                                                                </div>
+
+                                                                <div class="col-12 mb-0">
+                                                                    <label for="dobWithTitle" class="form-label">Comentarios</label>
+                                                                    <input type="text" id="txtComentariosCalificacion" class="form-control"/>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" id="closeModalCalificacion" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                                Cerrar
+                                                            </button>
+                                                            <button type="button" onclick="range()" class="btn btn-primary">Calificar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
@@ -122,6 +450,7 @@
                         <div class="col-lg-4 col-md-4 order-1">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12 mb-4">
+                                    <p class="bg-success display-4 text-center text-white" style="border-radius: 0.5rem;">ABIERTO</p>
                                     <img
                                             src="assets/img/illustrations/man-with-laptop-light.png"
                                             style="height: 100%"
@@ -135,7 +464,7 @@
                     </div>
                     <div class="row">
                         <!-- Transactions -->
-                        <div class="col-md-12 col-lg-12 order-2 mb-4 mt-3">
+                        <div class="col-md-12 col-lg-12 order-2 mb-4 mt-2">
                             <div class="card h-100">
                                 <div class="card-header d-flex align-items-center justify-content-between">
                                     <h5 class="card-title m-0 me-2">Inscritos en el curso</h5>
@@ -204,6 +533,68 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+
+    window.addEventListener("DOMContentLoaded", () => {
+        const fr = new FaceRating("#face-rating");
+    });
+
+    class FaceRating {
+        constructor(qs) {
+            this.input = document.querySelector(qs);
+            this.input?.addEventListener("input", this.update.bind(this));
+            this.face = this.input?.previousElementSibling;
+            this.update();
+        }
+        update(e) {
+            let value = this.input.defaultValue;
+
+            if (e) value = e.target?.value;
+            else this.input.value = value;
+
+            const min = this.input.min || 0;
+            const max = this.input.max || 100;
+            const percentRaw = (value - min) / (max - min) * 100;
+            const percent = +percentRaw.toFixed(2);
+
+            this.input?.style.setProperty("--percent", `${percent}%`);
+
+            const maxHue = 120;
+            const hueExtend = 30;
+            const hue = Math.round(maxHue * percent / 100);
+
+            let hue2 = hue - hueExtend;
+            if (hue2 < 0) hue2 += 360;
+
+            const hues = [hue, hue2];
+            hues.forEach((h, i) => {
+                this.face?.style.setProperty(`--face-hue${i + 1}`, h);
+            });
+
+            this.input?.style.setProperty("--input-hue", hue);
+
+            const duration = 1;
+            const delay = -(duration * 0.99) * percent / 100;
+            const parts = ["right", "left", "mouth-lower", "mouth-upper"];
+
+            parts.forEach(p => {
+                const el = this.face?.querySelector(`[data-${p}]`);
+                el?.style.setProperty(`--delay-${p}`, `${delay}s`);
+            });
+
+            const faces = [
+                "Sad face",
+                "Slightly sad face",
+                "Straight face",
+                "Slightly happy face",
+                "Happy face"
+            ];
+            let faceIndex = Math.floor(faces.length * percent / 100);
+            if (faceIndex === faces.length) --faceIndex;
+
+            this.face?.setAttribute("aria-label", faces[faceIndex]);
+        }
+    }
+
     var id;
 
     $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaLista.php?idLista='+getParameterByName("idLista"), function (data) {
@@ -385,6 +776,18 @@
         if (nomina.length===7){return "0"+nomina}
     }
 
+    function verificarTag(tag){
+        if (tag.length===1){return "000000000"+nomina}
+        if (tag.length===2){return "00000000"+nomina}
+        if (tag.length===3){return "0000000"+nomina}
+        if (tag.length===4){return "000000"+nomina}
+        if (tag.length===5){return "00000"+nomina}
+        if (tag.length===6){return "0000"+nomina}
+        if (tag.length===7){return "000"+nomina}
+        if (tag.length===8){return "00"+nomina}
+        if (tag.length===9){return "0"+nomina}
+    }
+
     function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -398,6 +801,78 @@
 
         return arrTerminos[0];
     }
+
+    function obtenerTag(nomina) {
+        return new Promise((resolve, reject) => {
+            $.getJSON('https://grammermx.com/RH/GrammovilApp/inicio/dao/DaoUsuario.php?usuario=' + verificarNomina(nomina))
+                .done(data => {
+                    if (data?.data?.length > 0) {
+                        resolve(data.data[0].IdTag);
+                    } else {
+                        resolve("");
+                    }
+                })
+                .fail(() => resolve(""));
+        });
+    }
+
+
+    async function range() {
+        var rango = document.getElementById("face-rating").value;
+        var nomina = verificarNomina(document.getElementById("txtNominaCalificacion").value);
+        var tag = verificarTag(document.getElementById("txtTagCalificacion").value);
+        var comentarios = document.getElementById("txtComentariosCalificacion").value;
+
+        var tagReal = await obtenerTag(nomina);
+
+        if (tagReal===tag){
+
+            var formData = new FormData();
+            formData.append('nomina', rango);
+            formData.append('calificacion', nomina);
+            formData.append('folioLista', id);
+            formData.append('comentarios', comentarios);
+
+            fetch('https://grammermx.com/RH/GrammerLearning/dao/daoGuardarCalificacion.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("closeModalCalificacion").click();
+                    if (data.ya_registrado) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Ya calificaste el curso",
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    } else if (data.success) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Registrado",
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    } else {
+                        // Otros errores
+                        alert('Error: ' + data.message);
+                    }
+                });
+
+        }else{
+            Swal.fire({
+                icon: "danger",
+                title: "Tag incorrecto, verificalo por favor",
+                showConfirmButton: false,
+                timer: 1000
+            });
+        }
+
+
+
+    }
+
 
 
 </script>
