@@ -57,7 +57,7 @@ ob_start();
                 </th>
                 <td>
                     <div class="col">
-                        <img class="logoGrammer2-img logoR" alt="LogoGrammer" src="https://arketipo.mx/Produccion/ML/PW_MetrologyLaboratory/imgs/logoGrammer.png"><br>
+                        <img class="logoGrammer2-img logoR" alt="LogoGrammer" src="https://grammermx.com/Controlling/BonoSalida/images/GrammerLogo.png"><br>
                     </div>
                 </td>
             </tr>
@@ -83,12 +83,6 @@ ob_start();
                         <td><?php echo $Fecha;?></td>
                         <th class=""> Capacidad:</th>
                         <td><?php echo $Capacidad;?> personas</td>
-                    </tr>
-                    <tr>
-                        <th class="">Horario: </th>
-                        <td></td>
-                        <th class="">Duracion: </th>
-                        <td><a href=""></a></td>
                     </tr>
                     <tr>
                         <th class="">Tipo: </th>
