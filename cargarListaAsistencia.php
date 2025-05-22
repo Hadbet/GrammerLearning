@@ -152,7 +152,7 @@
                       <h5 class="card-title m-0 me-2">Cursos concluidos</h5>
                     </div>
                     <div class="card-body">
-                      <ul class="p-0 m-0">
+                      <ul class="p-0 m-0" id="cursosConcluidos">
 
                         <li class="d-flex mb-4 pb-1">
                           <div class="avatar flex-shrink-0 me-3">
@@ -234,21 +234,22 @@
       function calificacionCurso() {
           const nomina = "00001606";
           const cursosContainer = document.getElementById("cursosPendientes");
+          const cursosConcluidos = document.getElementById("cursosConcluidos");
 
           $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaListasByNomina.php?nomina=' + nomina)
               .done(function(data) {
                   if (data?.data?.length > 0) {
                       // Limpiar contenedor primero
                       cursosContainer.innerHTML = '';
-
+                      cursosConcluidos.innerHTML = '';
                       data.data.forEach(curso => {
                           if (!curso.Tema || !curso.IdLista) return;
 
-                          // Crear elementos DOM de forma segura
-                          const listItem = document.createElement('li');
-                          listItem.className = 'd-flex mb-4 pb-1';
+                          if (curso.Estatus==0){
+                              const listItem = document.createElement('li');
+                              listItem.className = 'd-flex mb-4 pb-1';
 
-                          listItem.innerHTML = `
+                              listItem.innerHTML = `
                         <div class="avatar flex-shrink-0 me-3">
                             <img src="assets/img/icons/rojo.png" alt="User" class="rounded"/>
                         </div>
@@ -263,16 +264,40 @@
                             </div>
                         </div>
                     `;
+                              cursosContainer.appendChild(listItem);
+                          }else {
 
-                          cursosContainer.appendChild(listItem);
+                              const listItemConcluido = document.createElement('li');
+                              listItemConcluido.className = 'd-flex mb-4 pb-1';
+
+                              listItemConcluido.innerHTML = `
+                        <div class="avatar flex-shrink-0 me-3">
+                            <img src="assets/img/icons/verde.png" alt="User" class="rounded"/>
+                        </div>
+                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                            <div class="me-2">
+                                <small class="text-muted d-block mb-1">${curso.TipoInstructor == 1 ? 'Interno' : curso.TipoInstructor == 2 ? 'Externo' : 'Sin tipo'}</small>
+                                <h6 class="mb-0">${curso.Tema}</h6>
+                            </div>
+                            <div class="user-progress d-flex align-items-center gap-1">
+                                <a href="https://grammermx.com/RH/GrammerLearning/lista_asistencia.php?idLista=${curso.IdLista}" class="btn btn-sm btn-outline-primary">Ver curso</a>
+                            </div>
+                        </div>
+                    `;
+
+                              cursosConcluidos.appendChild(listItemConcluido);
+                          }
+                          // Crear elementos DOM de forma segura
                       });
                   } else {
                       cursosContainer.innerHTML = '<li class="text-muted">No hay cursos pendientes</li>';
+                      cursosConcluidos.innerHTML = '<li class="text-muted">No hay cursos pendientes</li>';
                   }
               })
               .fail(function(jqXHR, textStatus, error) {
                   console.error("Error al obtener cursos:", textStatus, error);
                   cursosContainer.innerHTML = '<li class="text-danger">Error al cargar cursos</li>';
+                  cursosConcluidos.innerHTML = '<li class="text-danger">Error al cargar cursos</li>';
               });
       }
 
