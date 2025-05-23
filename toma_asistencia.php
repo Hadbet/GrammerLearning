@@ -186,7 +186,6 @@
                 htmlLista += '</ul>';
 
                 document.getElementById("lblTemario").innerHTML = htmlLista;
-                llenadoTabla();
                 llenadoTablaAsistencias();
             }
         }else{
@@ -310,7 +309,6 @@
                 .then(response => response.json())
                 .then(data => {
                     llenadoTablaAsistencias();
-                    llenadoTabla();
                     if (data.ya_registrado) {
                         Swal.fire({
                             icon: "success",
