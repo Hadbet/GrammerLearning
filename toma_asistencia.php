@@ -52,8 +52,7 @@
                                                 <dd class="col-sm-9" id="lblObjetivo"></dd>
 
                                                 <dt class="col-sm-3">Temario</dt>
-                                                <dd class="col-sm-9" id="lblTemario">
-                                                </dd>
+                                                <dd class="col-sm-9" id="lblTemario"></dd>
 
                                                 <dt class="col-sm-3">Instructor</dt>
                                                 <dd class="col-sm-9" id="lblInstructor"></dd>
@@ -125,7 +124,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -150,8 +148,6 @@
     var id;
 
     $.getJSON('https://grammermx.com/RH/GrammerLearning/dao/consultaLista.php?idLista='+getParameterByName("idLista"), function (data) {
-
-
 
         if (data && data.data && data.data.length > 0) {
             for (var i = 0; i < data.data.length; i++) {
@@ -219,7 +215,6 @@
                 statusLabel.className = `${baseClasses} bg-warning`;
                 tomaAsistencia.style.display = "none";
         }
-
         statusLabel.style.borderRadius = "0.5rem";
     }
 

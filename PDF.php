@@ -13,7 +13,7 @@ $id = $query_params['id'];// Extraer el ID de la prueba
 $con = new LocalConector();
 $conex = $con->conectar();
 
-$datos = mysqli_query($conex, "SELECT `IdAsistencia`, `Nomina`, `Nombre`, `FolioLista`, `FechaRegistro`, `Estatus`, `EvaluacionCurso`, `EvaluacionInstructor`, `Comentarios`, `FechaAsistencia` FROM `Asistencias` WHERE `FolioLista` = '$id'");
+$datos = mysqli_query($conex, "SELECT `IdAsistencia`, `Nomina`, `Nombre`, `FolioLista`, `FechaRegistro`, `Estatus`, `EvaluacionCurso`, `EvaluacionInstructor`, `Comentarios`, `FechaAsistencia` FROM `Asistencias` WHERE `FolioLista` = '$id' and  `Estatus` = 1");
 $resultados = mysqli_fetch_all($datos, MYSQLI_ASSOC);
 
 $selectQuery = "SELECT `IdLista`, `Tema`, `Objetivo`, `Temario`, `Instructor`, `TipoInstructor`, `Area`, `FechaInicio`, `FechaCreacion`, `FechaCierre`, `Estatus`, `Creador` FROM `Listas_Asistencias` WHERE `IdLista` = '$id'";
