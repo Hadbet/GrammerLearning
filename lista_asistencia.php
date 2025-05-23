@@ -716,7 +716,7 @@
             case 2:
                 statusLabel.innerHTML = "Curso Cerrado";
                 statusLabel.className = `${baseClasses} bg-danger`;
-                btnAnotarmeCurso.style.display = "inline-block";
+                btnAnotarmeCurso.style.display = "none";
                 btnCalificacion.style.display = "inline-block";
                 break;
             case 3:
@@ -728,7 +728,7 @@
             default:
                 statusLabel.innerHTML = "Curso en Espera";
                 statusLabel.className = `${baseClasses} bg-warning`;
-                btnAnotarmeCurso.style.display = "none";
+                btnAnotarmeCurso.style.display = "inline-block";
                 btnCalificacion.style.display = "none";
         }
 
