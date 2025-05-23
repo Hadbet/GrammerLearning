@@ -711,25 +711,25 @@
                 statusLabel.innerHTML = "Curso Activo";
                 statusLabel.className = `${baseClasses} bg-success`;
                 btnAnotarmeCurso.style.display = "none";
-                btnCalificacion.display = "none";
+                btnCalificacion.style.display = "none";
                 break;
             case 2:
                 statusLabel.innerHTML = "Curso Cerrado";
                 statusLabel.className = `${baseClasses} bg-danger`;
                 btnAnotarmeCurso.style.display = "inline-block";
-                btnCalificacion.display = "inline-block";
+                btnCalificacion.style.display = "inline-block";
                 break;
             case 3:
                 statusLabel.innerHTML = "Curso Cancelado";
                 statusLabel.className = `${baseClasses} bg-secondary`;
                 btnAnotarmeCurso.style.display = "none";
-                btnCalificacion.display = "none";
+                btnCalificacion.style.display = "none";
                 break;
             default:
                 statusLabel.innerHTML = "Curso en Espera";
                 statusLabel.className = `${baseClasses} bg-warning`;
                 btnAnotarmeCurso.style.display = "none";
-                btnCalificacion.display = "none";
+                btnCalificacion.style.display = "none";
         }
 
         statusLabel.style.borderRadius = "0.5rem";
