@@ -721,7 +721,7 @@
                 btnAnotarmeCurso.style.display = "none";
                 break;
             default:
-                statusLabel.innerHTML = "Estado desconocido";
+                statusLabel.innerHTML = "Curso en Espera";
                 statusLabel.className = `${baseClasses} bg-warning`;
                 btnAnotarmeCurso.style.display = "none";
         }
