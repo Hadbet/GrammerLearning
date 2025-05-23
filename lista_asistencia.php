@@ -377,7 +377,7 @@
                                                 Descargar lista
                                             </button>
 
-                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCalificacion">
+                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCalificacion" id="btnCalificacion">
                                                 Calificar Curso
                                             </button>
 
@@ -703,28 +703,33 @@
     function actualizarLayoutEstados(estatus) {
         const statusLabel = document.getElementById("lblEstatusCurso");
         const btnAnotarmeCurso = document.getElementById("btnAnotarmeCurso");
+        const btnCalificacion = document.getElementById("btnCalificacion");
         const baseClasses = "text-white display-5 text-center";
 
         switch(parseInt(estatus)) {
             case 1:
                 statusLabel.innerHTML = "Curso Activo";
                 statusLabel.className = `${baseClasses} bg-success`;
-                btnAnotarmeCurso.style.display = "inline-block";
+                btnAnotarmeCurso.style.display = "none";
+                btnCalificacion.display = "none";
                 break;
             case 2:
                 statusLabel.innerHTML = "Curso Cerrado";
                 statusLabel.className = `${baseClasses} bg-danger`;
-                btnAnotarmeCurso.style.display = "none";
+                btnAnotarmeCurso.style.display = "inline-block";
+                btnCalificacion.display = "inline-block";
                 break;
             case 3:
                 statusLabel.innerHTML = "Curso Cancelado";
                 statusLabel.className = `${baseClasses} bg-secondary`;
                 btnAnotarmeCurso.style.display = "none";
+                btnCalificacion.display = "none";
                 break;
             default:
                 statusLabel.innerHTML = "Curso en Espera";
                 statusLabel.className = `${baseClasses} bg-warning`;
                 btnAnotarmeCurso.style.display = "none";
+                btnCalificacion.display = "none";
         }
 
         statusLabel.style.borderRadius = "0.5rem";
