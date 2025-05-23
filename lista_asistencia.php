@@ -656,6 +656,7 @@
                 actualizarLayoutEstados(estatus);
                 document.getElementById("lblTema").innerHTML = tema;
                 document.getElementById("lblObjetivo").innerHTML = objetivo;
+                if (tipoInstructor==1){tipoInstructor="Interno"}else{tipoInstructor="Externo"}
                 document.getElementById("lblInstructor").innerHTML = instructor;
                 document.getElementById("lblTipoInstructor").innerHTML = tipoInstructor;
                 document.getElementById("lblArea").innerHTML = area;
