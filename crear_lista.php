@@ -217,15 +217,12 @@
           const temarioInput = document.getElementById('temario-input');
           const temarioTable = document.getElementById('temario-table').getElementsByTagName('tbody')[0];
 
-          // Agregar tema al presionar Enter
           temarioInput.addEventListener('keypress', function(e) {
               if (e.key === 'Enter' && this.value.trim() !== '') {
                   e.preventDefault();
 
-                  // Crear nueva fila
                   const newRow = temarioTable.insertRow();
 
-                  // Número de fila (contador)
                   const cellNum = newRow.insertCell(0);
                   cellNum.textContent = temarioTable.rows.length;
 

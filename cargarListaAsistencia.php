@@ -67,7 +67,7 @@
                             Tenemos muchos cursos <span class="fw-bold">interesantes para ti</span> puedes ver mas detalles en la seccion de "Mis cursos"
                           </p>
 
-                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">Ir a la seccion</a>
+                          <a href="crear_lista.php" class="btn btn-sm btn-outline-primary">Ir a la seccion</a>
 
                         </div>
                       </div>
