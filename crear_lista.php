@@ -74,7 +74,7 @@
                                           <small class="text-muted">Escanea este código QR para acceder al registro</small>
                                       </div>
                                       <div class="modal-footer">
-                                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="cerrar()">Cerrar</button>
                                       </div>
                                   </div>
                               </div>
@@ -196,15 +196,11 @@
       >
     </div>
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
     <script src="assets/vendor/libs/jquery/jquery.js"></script>
     <script src="assets/vendor/libs/popper/popper.js"></script>
     <script src="assets/vendor/js/bootstrap.js"></script>
     <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
     <script src="assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
     <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/dashboards-analytics.js"></script>
@@ -315,7 +311,6 @@
           for (let i = 0; i < rows.length; i++) {
               const num = rows[i].cells[0].textContent;
               const desc = rows[i].cells[1].textContent;
-
               if (i > 0) temarioCompleto += ", ";
               temarioCompleto += `${num} ${desc}`;
           }
@@ -382,6 +377,10 @@
                       alert('Error al guardar: ' + (data.message || 'Error desconocido'));
                   }
               });
+      }
+
+      function cerrar() {
+          window.location.href = "cargarListaAsistencia.php";
       }
 
   </script>
