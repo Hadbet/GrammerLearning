@@ -370,7 +370,6 @@
                           const copyText = document.getElementById('folioLink');
                           copyText.select();
                           document.execCommand('copy');
-                          // Puedes agregar una notificación de que se copió
                           alert('Enlace copiado al portapapeles');
                       });
                   } else {
