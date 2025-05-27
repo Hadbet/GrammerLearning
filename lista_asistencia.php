@@ -864,7 +864,6 @@
             });
     }
 
-
     function verificarNomina(nomina){
         if (nomina.length===1){return "0000000"+nomina}
         if (nomina.length===2){return "000000"+nomina}
@@ -891,13 +890,8 @@
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
             results = regex.exec(location.search);
-
-
         var cadena = results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-
         var arrTerminos = cadena.split(',');
-
-
         return arrTerminos[0];
     }
 

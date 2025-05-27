@@ -311,6 +311,7 @@
                             showConfirmButton: false,
                             timer: 1000
                         });
+                        document.getElementById("txtNominaAsistencia").value="";
                     } else if (data.success) {
                         Swal.fire({
                             icon: "success",
@@ -318,6 +319,7 @@
                             showConfirmButton: false,
                             timer: 1000
                         });
+                        document.getElementById("txtNominaAsistencia").value="";
                     } else {
                         alert('Error: ' + data.message);
                     }
