@@ -839,6 +839,8 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById("closeModal").click();
+                document.getElementById("txtNomina").value = '';
+                document.getElementById("txtNombre").value = '';
                 llenadoTabla();
                 if (data.ya_registrado) {
                     Swal.fire({
