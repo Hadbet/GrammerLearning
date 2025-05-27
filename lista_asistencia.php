@@ -692,7 +692,7 @@
                     actualizarLayoutEstados(estatus);
                     //llenadoTabla();
                     //llenadoTablaAsistencias();
-                    //calificacionCurso();
+                    calificacionCurso();
                 }
             }else{
 
@@ -743,13 +743,10 @@
             if (data && data.data && data.data.length > 0) {
                 for (var i = 0; i < data.data.length; i++) {
                     const fila = tabla.insertRow();
-
                     const celdaNomina = fila.insertCell(0);
                     const celdaNombre = fila.insertCell(1);
-
                     celdaNomina.textContent = data.data[i].Nomina;
                     celdaNombre.textContent = data.data[i].Nombre;
-
                     fila.classList.add('fila-asistente');
                     celdaNomina.classList.add('text-center');
                 }
@@ -778,13 +775,10 @@
             if (data && data.data && data.data.length > 0) {
                 for (var i = 0; i < data.data.length; i++) {
                     const fila = tabla.insertRow();
-
                     const celdaNomina = fila.insertCell(0);
                     const celdaNombre = fila.insertCell(1);
-
                     celdaNomina.textContent = data.data[i].Nomina;
                     celdaNombre.textContent = data.data[i].Nombre;
-
                     fila.classList.add('fila-asistente');
                     celdaNomina.classList.add('text-center');
                 }
@@ -915,7 +909,6 @@
         var nomina = verificarNomina(document.getElementById("txtNominaCalificacion").value);
         var tag = verificarTag(document.getElementById("txtTagCalificacion").value);
         var comentarios = document.getElementById("txtComentariosCalificacion").value;
-
         var tagReal = await obtenerTag(nomina);
 
         if (tagReal===tag){
@@ -948,7 +941,6 @@
                             timer: 1000
                         });
                     } else {
-                        // Otros errores
                         alert('Error: ' + data.message);
                     }
                 });
@@ -967,21 +959,17 @@
         const stars = document.querySelectorAll('#ratingContainer i');
         const ratingValue = document.getElementById('ratingValue');
 
-        // Actualizar el valor numérico
         ratingValue.textContent = rating.toFixed(1);
 
-        // Resetear todas las estrellas
         stars.forEach(star => {
             star.classList.remove('active', 'half-active');
         });
 
-        // Activar estrellas completas
         const fullStars = Math.floor(rating);
         for (let i = 0; i < fullStars; i++) {
             stars[i].classList.add('active');
         }
 
-        // Activar media estrella si hay decimal
         const decimal = rating - fullStars;
         if (decimal > 0) {
             stars[fullStars].classList.add('half-active');
