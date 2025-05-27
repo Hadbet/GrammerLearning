@@ -234,7 +234,7 @@
                           if (!curso.Tema || !curso.IdLista) return;
                           total++;
 
-                          if (curso.Estatus==1){
+                          if (curso.Estatus==1 || curso.Estatus==0){
                               pendientes++;
                               const listItem = document.createElement('li');
                               listItem.className = 'd-flex mb-4 pb-1';
