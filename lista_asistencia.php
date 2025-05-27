@@ -817,6 +817,7 @@
                 document.getElementById("btnAnotarme").disabled = false;
             }else{
                 document.getElementById("btnAnotarme").disabled = true;
+                document.getElementById("txtNombre").value = "No se encontro tu número de nómina";
             }
         });
 
